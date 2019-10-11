@@ -1,0 +1,525 @@
+---
+title: Cashflowy API Reference
+ 
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell
+  - javascript
+ 
+toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+ 
+includes:
+  - errors
+ 
+search: true
+---
+ 
+# Introduction
+ 
+Welcome to the **Cashflowy API**! You can use our API to access Cashflowy API endpoints, which can get information on objects in our database.
+ 
+We have language bindings in Shell,JavaScript!  You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+
+# Org
+Every user belongs to an organization and all Cashflowy related objects are associated with an org. 
+
+> The Org object
+
+```json
+attributes: {
+        name: {
+            type: 'string',
+        },
+        description: { // some description about the organization
+            type: 'string',
+            allowNull:true
+        },
+        type: {
+            type: 'string',
+            isIn:['personal','business']
+        },
+        email:{
+            type: 'string',
+            unique: true,
+            allowNull: true
+        },
+        is_active:{
+            type: 'boolean',
+            defaultsTo: true
+        },
+        owner:{ // 
+            model:'user',
+            required:true
+        },
+        members: { // 
+            collection: 'member',
+            via:'org',
+        },
+
+
+```
+
+>End of object
+
+Attribute | Description
+--------- | -----------
+name | The name of the organization
+description | string, some description about the organization
+type | string, type of the organization, either personal or business
+email | string, email assocated with the organization
+is_active | boolean, whether or not is the email
+owner | user, owner of the organization
+members | member , members of the organization
+
+# Authentication
+ 
+> To authorize, use this code:
+ 
+```shell
+# With shell, you can just pass the header with Authorization type as Bearer token in each request
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/accounts
+  -H 'Authorization: Bearer cashflowyApiKey'
+```
+ 
+```javascript
+var request = require("request");
+ 
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/accounts',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey' } };
+ 
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+ 
+  console.log(body);
+});
+ 
+```
+ 
+> Make sure to replace `cashflowyApiKey'` with your API key.
+ 
+When you send a request, you often have to include parameters to ensure the request has permission to access and return the data you want.
+ 
+To get started you need to generate an api key.
+<ul>
+<li>Login to your Cashflowy account at <a href="app.cashflowy.in">app.cashflowy.in</a></li>
+<li>Navigate to the right-hand side of the top navigation and click on "User settings"</li>
+<li>You will get the following screen</li>
+<%= image_tag "images/Slate_GenApiKey.png" %>
+<li>Click on "Generate a new API Token" to get your key</li>
+</ul>
+ 
+ 
+ 
+ 
+ 
+`Authorization: Bearer cashflowyApiKey'`
+ 
+<aside class="notice">
+You must replace <code>cashflowyApiKey'</code> with your personal API key.
+</aside>
+ 
+# Objects
+Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.
+ 
+## Accounts
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/accounts
+  -H 'Authorization: Bearer cashflowyApiKey'
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/accounts',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "statements": [],
+        "createdAt": "2019-07-29T19:35:28.671Z",
+        "updatedAt": "2019-07-29T19:37:43.845Z",
+        "id": 119,
+        "type": "bank",
+        "details": {
+            "last_snapshot": {
+                "createdAt": "2019-07-29T19:35:28.685Z",
+                "updatedAt": "2019-07-29T19:35:28.685Z",
+                "id": 3859,
+                "createdBy": "parsed_email",
+                "details": {},
+                "balance": 5781.17,
+                "takenAt": "2019-07-29T19:35:14.000Z",
+                "account": 119
+            }
+        },
+        "name": "ICICI301",
+        "acc_number": "301",
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "Prateek Kumar Satpathy",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "PRAT8478",
+                    "055801605301",
+                    "PRAT2204"
+                ]
+            },
+            "owner": 33
+        }
+    },
+    {
+        "statements": [],
+        "createdAt": "2019-07-30T19:49:38.483Z",
+        "updatedAt": "2019-07-30T19:49:38.483Z",
+        "id": 124,
+        "type": "cash",
+        "details": {},
+        "name": "Cash Account",
+        "acc_number": "None",
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "Prateek Kumar Satpathy",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "PRAT8478",
+                    "055801605301",
+                    "PRAT2204"
+                ]
+            },
+            "owner": 33
+        }
+    },
+  ]
+```
+ 
+Account contains financial information and statements.
+ 
+### endpoints
+ 
+`GET https://app.cashflowy.in/api/org/:o_id/accounts`
+
+`GET https://app.cashflowy.in/api/org/:o_id/account/:id`
+
+### account schema
+
+`attributes: {
+		org: {
+	    	model: 'org',
+	    	required:true,
+		},
+		type:{
+			type:'string',
+			required:true,
+			isIn: [
+				"bank","credit_card","cash","wallet","investment"
+			]
+		},
+		details: {
+		  type: "json",
+		  defaultsTo:{}
+		},
+		name:{
+			type:'string',
+			required:true
+		},
+		acc_number:{ // credit card last 4 digits or bank acc number
+			type:'string', // 
+			required:true
+		},
+		statements:{
+			collection:'statement',
+			via:'accounts',
+			dominant:true
+		},
+  }
+`
+
+Attribute | Description
+--------- | -----------
+org | org(required), The name of the organization
+type | string(required), type of account
+details | string, details of the account
+name | string, account name
+acc_number | string(required), number associated with the account
+statements | statement, statements related to account
+
+### Query Parameters
+ 
+Parameter | Description
+--------- | -----------
+id(required) | id associated with the account to retrieve.
+
+ 
+## Transactions
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/transactions
+  -H 'Authorization: Bearer cashflowyApiKey' 
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/transactions',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey'} };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "tags": [
+            {
+                "createdAt": "2019-03-01T10:45:43.000Z",
+                "updatedAt": "2019-03-24T06:02:18.000Z",
+                "id": 17,
+                "name": "predicted_category",
+                "description": "category predicted by aws ml",
+                "type": "global",
+                "color": "grey",
+                "org": null
+            }
+        ],
+        "documents": [],
+        "createdAt": "2019-08-08T01:16:38.220Z",
+        "updatedAt": "2019-09-16T01:17:55.835Z",
+        "id": 10106,
+        "original_currency": "INR",
+        "original_amount": -110,
+        "amount_inr": -110,
+        "occuredAt": "2019-08-07T08:15:00.000Z",
+        "type": "income_expense",
+        "description": "Hakka Noodles and Chilli Chicken",
+        "third_party": "Eat Fit",
+        "account": {
+            "createdAt": "2019-07-29T19:35:28.671Z",
+            "updatedAt": "2019-07-29T19:37:43.845Z",
+            "id": 119,
+            "type": "bank",
+            "details": {
+                "last_snapshot": {
+                    "createdAt": "2019-07-29T19:35:28.685Z",
+                    "updatedAt": "2019-07-29T19:35:28.685Z",
+                    "id": 3859,
+                    "createdBy": "parsed_email",
+                    "details": {},
+                    "balance": 5781.17,
+                    "takenAt": "2019-07-29T19:35:14.000Z",
+                    "account": 119
+                }
+            },
+            "name": "ICICI301",
+            "acc_number": "301",
+            "org": 34
+        },
+        "to_account": null,
+        "category": {
+            "createdAt": "2019-07-30T20:19:59.777Z",
+            "updatedAt": "2019-07-30T20:19:59.777Z",
+            "id": 304,
+            "name": "Food",
+            "description": "Amount spend on Food",
+            "type": "expense",
+            "budget": 7500,
+            "org": 34,
+            "parent": null
+        },
+        "transaction_event": {
+            "createdAt": "2019-08-08T01:16:38.215Z",
+            "updatedAt": "2019-09-16T01:17:55.032Z",
+            "id": 10650,
+            "original_currency": "INR",
+            "original_amount": -110,
+            "amount_inr": -110,
+            "occuredAt": "2019-08-07T08:20:00.000Z",
+            "type": "income_expense",
+            "createdBy": "user",
+            "third_party": "Eat Fit",
+            "account": 119,
+            "to_account": null,
+            "transaction_group": 7146
+        },
+        "transaction_group": {
+            "createdAt": "2019-09-16T01:17:54.299Z",
+            "updatedAt": "2019-09-16T01:17:54.299Z",
+            "id": 7146
+        }
+    }
+  ]
+```
+ 
+Represents all transactional data.
+  
+### endpoints
+ 
+`GET https://app.cashflowy.in/api/org/:o_id/transactions`
+
+`GET https://app.cashflowy.in/api/org/:o_id/transactions/:id`
+
+### transactions schema
+
+`
+attributes: {
+		original_currency: {
+			type: 'string',
+		},
+		original_amount: {
+			type: 'number',
+			columnType: 'float8'
+		},
+		amount_inr: {
+			type: 'number',
+			columnType: 'float8'
+		},
+		occuredAt: { // defaults to createdAt. Useful when creating manually. 
+			type: 'ref',
+			columnType: 'timestamptz'
+		},
+		type: {
+			type: 'string',
+			isIn: ['income_expense', 'transfer']
+		},
+		description: {
+			type: 'string',
+			allowNull: true
+		},
+		account: { // from where the transaction is made
+			model: 'account',
+			required: true
+		},
+		to_account: { // only for transfers. The account to which you transferred the money to.
+			model: 'account'
+		},
+		third_party: { // only for income/expense. 
+			type: 'string',
+			allowNull: true
+		},
+		category: {
+			model: 'category'
+		},
+		tags: {
+			collection: 'tag',
+			via: 'transactions',
+			dominant: true
+		},
+		transaction_event: {
+			model: 'transaction_event',
+			required: true
+		},
+        documents:{
+			collection: 'document',
+			via:'transaction'
+        },
+        transaction_group: {
+            model: 'transaction_group'
+        }
+	}
+`
+
+Attribute | Description
+--------- | -----------
+original_currency | string, currency in which transaction is made
+original_amount | number, amount of thetransaction
+amount_inr | number, amount in inr
+occuredAt | ref, defaults to createdAt. Useful when creating manually. 
+type | string, type of transaction 'income_expense' or 'transfer'
+description | string, description of the transaction
+account | account(schema)(required), account from where transaction is made
+to_account | account(schema), only for transfers. The account to which you transferred the money to.
+third_party | string, only for income/expense 
+category | category(schema), to which category the transaction belongs
+tags | tag(collection), tag used to mark transaction
+transactional_event | transactional_event(schema)(required), what is the transactional event 
+documents | document(collection), documents supporting the transacton
+transaction_group | transaction_group(schema), grouping of transaction
+
+
+### Query Parameters
+ 
+Parameter | Description
+--------- | -----------
+id(required) | id associated with the transaction to retrieve.
+ 
+## Delete a Specific Kitten
+ 
+```shell
+curl "http://example.com/api/kittens/2"
+  -X DELETE
+  -H "Authorization: cashflowyApiKey'"
+```
+ 
+```javascript
+const kittn = require('kittn');
+ 
+let api = kittn.authorize('cashflowyApiKey'');
+let max = api.kittens.delete(2);
+```
+ 
+> The above command returns JSON structured like this:
+ 
+```json
+{
+  "id": 2,
+  "deleted" : ":("
+}
+```
+ 
+This endpoint deletes a specific kitten.
+ 
+### HTTP Request
+ 
+`DELETE http://example.com/kittens/<ID>`
+ 
+### URL Parameters
+ 
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to delete
