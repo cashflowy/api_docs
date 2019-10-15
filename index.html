@@ -239,6 +239,9 @@
                   <li>
                     <a href="#transactions" class="toc-h2 toc-link" data-title="Transactions">Transactions</a>
                   </li>
+                  <li>
+                    <a href="#categories" class="toc-h2 toc-link" data-title="Categories">Categories</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -323,7 +326,9 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
 <p>append this endpoint to the base url for all requests</p>
 </blockquote>
 
-<p>Every user belongs to an organization and all Cashflowy related objects are associated with an org. </p>
+<p>Every user belongs to an organization and all Cashflowy related objects are associated with an org object. </p>
+
+<p>User will have access to the organisation, the user is a part of with a single api key mentioned in the Authorization section above.</p>
 
 <blockquote>
 <p>The Org object</p>
@@ -363,7 +368,7 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
 <blockquote>
 <p>End of object</p>
 </blockquote>
-
+<h3 id='org-schema'>org schema</h3>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -409,8 +414,7 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
 </tbody></table>
 
 <aside class="notice">
-All following Cashflowy objects are linked to a certain organization or org object. 
-So it is mandatory to have the org endpoint before making an api call for fetching or posting any information.
+It is mandatory to have the org endpoint before making an api call for fetching or posting any information.
 </aside>
 <h1 id='objects'>Objects</h1>
 <p>Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.</p>
@@ -463,13 +467,13 @@ So it is mandatory to have the org endpoint before making an api call for fetchi
                 </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ICICI301"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ICICIxxx"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"acc_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"301"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prateek Kumar Satpathy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -479,9 +483,9 @@ So it is mandatory to have the org endpoint before making an api call for fetchi
                 </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="s2">"PRAT8478"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"055801605301"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"PRAT2204"</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
                 </span><span class="p">]</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
@@ -500,7 +504,7 @@ So it is mandatory to have the org endpoint before making an api call for fetchi
             </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prateek Kumar Satpathy"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -510,9 +514,9 @@ So it is mandatory to have the org endpoint before making an api call for fetchi
                 </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="s2">"PRAT8478"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"055801605301"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"PRAT2204"</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
                 </span><span class="p">]</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
@@ -644,7 +648,7 @@ So it is mandatory to have the org endpoint before making an api call for fetchi
                     </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ICICI301"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ICICIxxx"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"acc_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"301"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="w">
         </span><span class="p">},</span><span class="w">
@@ -773,6 +777,174 @@ So it is mandatory to have the org endpoint before making an api call for fetchi
 <tr>
 <td>id(required)</td>
 <td>id associated with the transaction to retrieve.</td>
+</tr>
+</tbody></table>
+<h2 id='categories'>Categories</h2>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/categories
+/transactionscategories/:id
+</code></pre>
+<blockquote>
+<p>GET /categories</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://app.cashflowy.in/api/org/:o_id/categories
+  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span> 
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/categories'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> 
+   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span><span class="p">}</span> <span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>Response json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T20:22:59.349Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T20:22:59.349Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">307</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Electricity"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount on Electricity Bill"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expense"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"default_account"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T20:21:10.270Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T20:21:10.270Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">305</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ammenities"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount spent on basic and necessary amenities"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expense"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-31T13:53:16.354Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-31T13:53:16.354Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">313</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Internet"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount on Internet Bill"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expense"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"default_account"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T20:21:10.270Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T20:21:10.270Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">305</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ammenities"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount spent on basic and necessary amenities"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expense"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Represents categories under which your transactions are grouped like income, expense, etc.
+Can have sub-categories as a further split up on need basis.</p>
+<h3 id='transactions-schema-2'>transactions schema</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>org</td>
+<td>org</td>
+<td>organisation of the user</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>category</td>
+<td>incase of a subcategory entry it has to have a parent category</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string(required)</td>
+<td>name of the category</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>description of the category</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>type of category (income or expense)</td>
+</tr>
+<tr>
+<td>budget</td>
+<td>number</td>
+<td>amount allocated for the category</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id(required)</td>
+<td>id associated with the category to retrieve.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
