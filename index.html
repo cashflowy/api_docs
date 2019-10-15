@@ -223,10 +223,12 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#org" class="toc-h1 toc-link" data-title="Org">Org</a>
-          </li>
-          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#org" class="toc-h2 toc-link" data-title="Org">Org</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#objects" class="toc-h1 toc-link" data-title="Objects">Objects</a>
@@ -252,10 +254,75 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
+<blockquote>
+<p>BASE URL</p>
+</blockquote>
+<pre class="highlight plaintext"><code>https://app.cashflowy.in/api
+</code></pre>
+<blockquote>
+<p>Use this as a base url before all endpoints</p>
+</blockquote>
+
 <p>Welcome to the <strong>Cashflowy API</strong>! You can use our API to access Cashflowy API endpoints, which can get information on objects in our database.</p>
 
 <p>We have language bindings in Shell,JavaScript!  You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-<h1 id='org'>Org</h1>
+<h1 id='authentication'>Authentication</h1>
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the header with Authorization type as Bearer token in each request</span>
+curl -X GET <span class="se">\</span>
+  https://app.cashflowy.in/api/org/:o_id/accounts
+  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/accounts'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> 
+   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span> <span class="p">}</span> <span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>Make sure to replace <code>cashflowyApiKey&#39;</code> with your API key.</p>
+</blockquote>
+
+<p><strong>Getting started</strong></p>
+
+<p>When you send a request, you often have to include parameters to ensure the request has permission to access and return the data you want.</p>
+
+<p>To get started you need to generate an api key.
+<ul>
+<li>Login to your Cashflowy account at <a href="app.cashflowy.in">app.cashflowy.in</a></li>
+<li>Navigate to the right-hand side of the top navigation and click on &quot;User settings&quot;</li>
+<li>You will get the following screen</li>
+<img src="images/Slate_GenApiKey.png" alt="Slate genapikey" />
+<li>Click on &quot;Generate a new API Token&quot; to get your key</li>
+</ul></p>
+
+<p><code>Authorization: Bearer cashflowyApiKey&#39;</code></p>
+
+<p>Your API keys carry many privileges, so be sure to keep them secure! 
+Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.</p>
+
+<aside class="notice">
+You must replace <code>cashflowyApiKey'</code> with your personal API key.
+</aside>
+<h2 id='org'>Org</h2>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/org/:o_id
+</code></pre>
+<blockquote>
+<p>append this endpoint to the base url for all requests</p>
+</blockquote>
+
 <p>Every user belongs to an organization and all Cashflowy related objects are associated with an org. </p>
 
 <blockquote>
@@ -300,84 +367,64 @@
 <table><thead>
 <tr>
 <th>Attribute</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>name</td>
+<td>string</td>
 <td>The name of the organization</td>
 </tr>
 <tr>
 <td>description</td>
-<td>string, some description about the organization</td>
+<td>string</td>
+<td>some description about the organization</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string, type of the organization, either personal or business</td>
+<td>string</td>
+<td>type of the organization, either personal or business</td>
 </tr>
 <tr>
 <td>email</td>
-<td>string, email assocated with the organization</td>
+<td>string</td>
+<td>email assocated with the organization</td>
 </tr>
 <tr>
 <td>is_active</td>
-<td>boolean, whether or not is the email</td>
+<td>boolean</td>
+<td>whether or not is the email</td>
 </tr>
 <tr>
 <td>owner</td>
-<td>user, owner of the organization</td>
+<td>user</td>
+<td>owner of the organization</td>
 </tr>
 <tr>
 <td>members</td>
-<td>member , members of the organization</td>
+<td>member</td>
+<td>members of the organization</td>
 </tr>
 </tbody></table>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the header with Authorization type as Bearer token in each request</span>
-curl -X GET <span class="se">\</span>
-  https://app.cashflowy.in/api/org/:o_id/accounts
-  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/accounts'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> 
-   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span> <span class="p">}</span> <span class="p">};</span>
-
-<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>cashflowyApiKey&#39;</code> with your API key.</p>
-</blockquote>
-
-<p>When you send a request, you often have to include parameters to ensure the request has permission to access and return the data you want.</p>
-
-<p>To get started you need to generate an api key.
-<ul>
-<li>Login to your Cashflowy account at <a href="app.cashflowy.in">app.cashflowy.in</a></li>
-<li>Navigate to the right-hand side of the top navigation and click on &quot;User settings&quot;</li>
-<li>You will get the following screen</li>
-<img src="images/Slate_GenApiKey.png" alt="Slate genapikey" />
-<li>Click on &quot;Generate a new API Token&quot; to get your key</li>
-</ul></p>
-
-<p><code>Authorization: Bearer cashflowyApiKey&#39;</code></p>
 
 <aside class="notice">
-You must replace <code>cashflowyApiKey'</code> with your personal API key.
+All following Cashflowy objects are linked to a certain organization or org object. 
+So it is mandatory to have the org endpoint before making an api call for fetching or posting any information.
 </aside>
- 
 <h1 id='objects'>Objects</h1>
 <p>Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.</p>
-<h2 id='accounts'>Accounts</h2><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+<h2 id='accounts'>Accounts</h2>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/accounts
+/accounts/:id
+</code></pre>
+<blockquote>
+<p>GET /accounts</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   https://app.cashflowy.in/api/org/:o_id/accounts
   -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
@@ -474,72 +521,43 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
   </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>Account contains financial information and statements.</p>
-<h3 id='endpoints'>endpoints</h3>
-<p><code>GET https://app.cashflowy.in/api/org/:o_id/accounts</code></p>
-
-<p><code>GET https://app.cashflowy.in/api/org/:o_id/account/:id</code></p>
 <h3 id='account-schema'>account schema</h3>
-<p><code>attributes: {
-        org: {
-            model: &#39;org&#39;,
-            required:true,
-        },
-        type:{
-            type:&#39;string&#39;,
-            required:true,
-            isIn: [
-                &quot;bank&quot;,&quot;credit_card&quot;,&quot;cash&quot;,&quot;wallet&quot;,&quot;investment&quot;
-            ]
-        },
-        details: {
-          type: &quot;json&quot;,
-          defaultsTo:{}
-        },
-        name:{
-            type:&#39;string&#39;,
-            required:true
-        },
-        acc_number:{ // credit card last 4 digits or bank acc number
-            type:&#39;string&#39;, // 
-            required:true
-        },
-        statements:{
-            collection:&#39;statement&#39;,
-            via:&#39;accounts&#39;,
-            dominant:true
-        },
-  }
-</code></p>
-
 <table><thead>
 <tr>
 <th>Attribute</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>org</td>
-<td>org(required), The name of the organization</td>
+<td>org(required)</td>
+<td>The name of the organization</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string(required), type of account</td>
+<td>string(required)</td>
+<td>type of account</td>
 </tr>
 <tr>
 <td>details</td>
-<td>string, details of the account</td>
+<td>string</td>
+<td>details of the account</td>
 </tr>
 <tr>
 <td>name</td>
-<td>string, account name</td>
+<td>string</td>
+<td>account name</td>
 </tr>
 <tr>
 <td>acc_number</td>
-<td>string(required), number associated with the account</td>
+<td>string(required)</td>
+<td>number associated with the account</td>
 </tr>
 <tr>
 <td>statements</td>
-<td>statement, statements related to account</td>
+<td>statement</td>
+<td>statements related to account</td>
 </tr>
 </tbody></table>
 <h3 id='query-parameters'>Query Parameters</h3>
@@ -554,7 +572,17 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
 <td>id associated with the account to retrieve.</td>
 </tr>
 </tbody></table>
-<h2 id='transactions'>Transactions</h2><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+<h2 id='transactions'>Transactions</h2>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/transactions
+/transactions/:id
+</code></pre>
+<blockquote>
+<p>GET /transactions</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   https://app.cashflowy.in/api/org/:o_id/transactions
   -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span> 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
@@ -656,130 +684,83 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
   </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>Represents all transactional data.</p>
-<h3 id='endpoints-2'>endpoints</h3>
-<p><code>GET https://app.cashflowy.in/api/org/:o_id/transactions</code></p>
-
-<p><code>GET https://app.cashflowy.in/api/org/:o_id/transactions/:id</code></p>
 <h3 id='transactions-schema'>transactions schema</h3>
-<p><code>
-attributes: {
-        original_currency: {
-            type: &#39;string&#39;,
-        },
-        original_amount: {
-            type: &#39;number&#39;,
-            columnType: &#39;float8&#39;
-        },
-        amount_inr: {
-            type: &#39;number&#39;,
-            columnType: &#39;float8&#39;
-        },
-        occuredAt: { // defaults to createdAt. Useful when creating manually. 
-            type: &#39;ref&#39;,
-            columnType: &#39;timestamptz&#39;
-        },
-        type: {
-            type: &#39;string&#39;,
-            isIn: [&#39;income_expense&#39;, &#39;transfer&#39;]
-        },
-        description: {
-            type: &#39;string&#39;,
-            allowNull: true
-        },
-        account: { // from where the transaction is made
-            model: &#39;account&#39;,
-            required: true
-        },
-        to_account: { // only for transfers. The account to which you transferred the money to.
-            model: &#39;account&#39;
-        },
-        third_party: { // only for income/expense. 
-            type: &#39;string&#39;,
-            allowNull: true
-        },
-        category: {
-            model: &#39;category&#39;
-        },
-        tags: {
-            collection: &#39;tag&#39;,
-            via: &#39;transactions&#39;,
-            dominant: true
-        },
-        transaction_event: {
-            model: &#39;transaction_event&#39;,
-            required: true
-        },
-        documents:{
-            collection: &#39;document&#39;,
-            via:&#39;transaction&#39;
-        },
-        transaction_group: {
-            model: &#39;transaction_group&#39;
-        }
-    }
-</code></p>
-
 <table><thead>
 <tr>
 <th>Attribute</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>original_currency</td>
-<td>string, currency in which transaction is made</td>
+<td>string</td>
+<td>currency in which transaction is made</td>
 </tr>
 <tr>
 <td>original_amount</td>
-<td>number, amount of thetransaction</td>
+<td>number</td>
+<td>amount of thetransaction</td>
 </tr>
 <tr>
 <td>amount_inr</td>
-<td>number, amount in inr</td>
+<td>number</td>
+<td>amount in inr</td>
 </tr>
 <tr>
 <td>occuredAt</td>
-<td>ref, defaults to createdAt. Useful when creating manually.</td>
+<td>ref</td>
+<td>defaults to createdAt. Useful when creating manually.</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string, type of transaction &#39;income_expense&#39; or &#39;transfer&#39;</td>
+<td>string</td>
+<td>type of transaction &#39;income_expense&#39; or &#39;transfer&#39;</td>
 </tr>
 <tr>
 <td>description</td>
-<td>string, description of the transaction</td>
+<td>string</td>
+<td>description of the transaction</td>
 </tr>
 <tr>
 <td>account</td>
-<td>account(schema)(required), account from where transaction is made</td>
+<td>account(required)</td>
+<td>account from where transaction is made</td>
 </tr>
 <tr>
 <td>to_account</td>
-<td>account(schema), only for transfers. The account to which you transferred the money to.</td>
+<td>account</td>
+<td>only for transfers. The account to which you transferred the money to.</td>
 </tr>
 <tr>
 <td>third_party</td>
-<td>string, only for income/expense</td>
+<td>string</td>
+<td>only for income/expense</td>
 </tr>
 <tr>
 <td>category</td>
-<td>category(schema), to which category the transaction belongs</td>
+<td>category</td>
+<td>to which category the transaction belongs</td>
 </tr>
 <tr>
 <td>tags</td>
-<td>tag(collection), tag used to mark transaction</td>
+<td>tag(collection)</td>
+<td>tag used to mark transaction</td>
 </tr>
 <tr>
 <td>transactional_event</td>
-<td>transactional_event(schema)(required), what is the transactional event</td>
+<td>transactional_event(required)</td>
+<td>what is the transactional event</td>
 </tr>
 <tr>
 <td>documents</td>
-<td>document(collection), documents supporting the transacton</td>
+<td>document</td>
+<td>documents supporting the transacton</td>
 </tr>
 <tr>
 <td>transaction_group</td>
-<td>transaction_group(schema), grouping of transaction</td>
+<td>transaction_group</td>
+<td>grouping of transaction</td>
 </tr>
 </tbody></table>
 <h3 id='query-parameters-2'>Query Parameters</h3>
