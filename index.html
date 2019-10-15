@@ -242,6 +242,9 @@
                   <li>
                     <a href="#categories" class="toc-h2 toc-link" data-title="Categories">Categories</a>
                   </li>
+                  <li>
+                    <a href="#tags" class="toc-h2 toc-link" data-title="Tags">Tags</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -784,7 +787,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <p>ENDPOINTS</p>
 </blockquote>
 <pre class="highlight plaintext"><code>/categories
-/transactionscategories/:id
+/categories/:id
 </code></pre>
 <blockquote>
 <p>GET /categories</p>
@@ -894,9 +897,9 @@ It is mandatory to have the org endpoint before making an api call for fetching 
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>Represents categories under which your transactions are grouped like income, expense, etc.
+<p>Represents categories under which your budgets- income or expenses are grouped like income, expense, etc.
 Can have sub-categories as a further split up on need basis.</p>
-<h3 id='transactions-schema-2'>transactions schema</h3>
+<h3 id='categories-schema'>categories schema</h3>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -945,6 +948,140 @@ Can have sub-categories as a further split up on need basis.</p>
 <tr>
 <td>id(required)</td>
 <td>id associated with the category to retrieve.</td>
+</tr>
+</tbody></table>
+<h2 id='tags'>Tags</h2>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/tags
+/tags/:id
+</code></pre>
+<blockquote>
+<p>GET /tags</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://app.cashflowy.in/api/org/:o_id/tags
+  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span> 
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/tags'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> 
+   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span><span class="p">}</span> <span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>Response json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:48:31.107Z"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T04:14:27.608Z"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9978</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"original_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"original_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">12776</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"amount_inr"</span><span class="p">:</span><span class="w"> </span><span class="mi">12776</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"occuredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-28T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"income_expense"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repaid Credit card bill"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"third_party"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMPS PMT 917911409628 9229 (Ref# 00000000000628011823513)"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"to_account"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"transaction_event"</span><span class="p">:</span><span class="w"> </span><span class="mi">10522</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"transaction_group"</span><span class="p">:</span><span class="w"> </span><span class="mi">10639</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T20:10:36.702Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T20:10:36.702Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repay_Hdfc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repayment of credit card"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"teal"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"default_account"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Represents tags under which transactions are marked by user.</p>
+<h3 id='tags-schema'>tags schema</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>org</td>
+<td>org</td>
+<td>some tags can be globally defined;some tags can be specific to a user, while some tags can be global,this field only need when type=user</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string(required)</td>
+<td>name of the tag</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>description of the tag</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>user or global</td>
+</tr>
+<tr>
+<td>color</td>
+<td>string</td>
+<td>color of the tag; defaults to &quot;teal&quot;</td>
+</tr>
+<tr>
+<td>transactions</td>
+<td>transaction</td>
+<td>transaction which is tagged</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id(required)</td>
+<td>id associated with the tag to retrieve.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
