@@ -87,8 +87,9 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
 > append this endpoint to the base url for all requests
 
 
-Every user belongs to an organization and all Cashflowy related objects are associated with an org. 
+Every user belongs to an organization and all Cashflowy related objects are associated with an org object. 
 
+User will have access to the organisation, the user is a part of with a single api key mentioned in the Authorization section above.
 > The Org object
 
 ```json
@@ -127,6 +128,8 @@ attributes: {
 
 >End of object
 
+### org schema
+
 Attribute |Type | Description
 --------- |---- |-----------
 name |string | The name of the organization
@@ -138,8 +141,7 @@ owner | user | owner of the organization
 members | member | members of the organization
 
 <aside class="notice">
-All following Cashflowy objects are linked to a certain organization or org object. 
-So it is mandatory to have the org endpoint before making an api call for fetching or posting any information.
+It is mandatory to have the org endpoint before making an api call for fetching or posting any information.
 </aside>
 
 # Objects
@@ -200,13 +202,13 @@ request(options, function (error, response, body) {
                 "account": 119
             }
         },
-        "name": "ICICI301",
+        "name": "ICICIxxx",
         "acc_number": "301",
         "org": {
             "createdAt": "2019-06-25T09:30:53.169Z",
             "updatedAt": "2019-09-16T21:56:04.366+00:00",
             "id": 34,
-            "name": "Prateek Kumar Satpathy",
+            "name": "User 1",
             "description": null,
             "type": "personal",
             "email": null,
@@ -216,9 +218,9 @@ request(options, function (error, response, body) {
                 "timezone_offset": -330,
                 "default_currency": "INR",
                 "statement_passwords": [
-                    "PRAT8478",
-                    "055801605301",
-                    "PRAT2204"
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
                 ]
             },
             "owner": 33
@@ -237,7 +239,7 @@ request(options, function (error, response, body) {
             "createdAt": "2019-06-25T09:30:53.169Z",
             "updatedAt": "2019-09-16T21:56:04.366+00:00",
             "id": 34,
-            "name": "Prateek Kumar Satpathy",
+            "name": "User 1",
             "description": null,
             "type": "personal",
             "email": null,
@@ -247,9 +249,9 @@ request(options, function (error, response, body) {
                 "timezone_offset": -330,
                 "default_currency": "INR",
                 "statement_passwords": [
-                    "PRAT8478",
-                    "055801605301",
-                    "PRAT2204"
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
                 ]
             },
             "owner": 33
@@ -355,7 +357,7 @@ request(options, function (error, response, body) {
                     "account": 119
                 }
             },
-            "name": "ICICI301",
+            "name": "ICICIxxx",
             "acc_number": "301",
             "org": 34
         },
@@ -422,3 +424,145 @@ transaction_group | transaction_group| grouping of transaction
 Parameter | Description
 --------- | -----------
 id(required) | id associated with the transaction to retrieve.
+
+
+## Categories
+> ENDPOINTS
+
+```
+/categories
+/transactionscategories/:id
+```
+
+> GET /categories
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/categories
+  -H 'Authorization: Bearer cashflowyApiKey' 
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/categories',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey'} };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "createdAt": "2019-07-30T20:22:59.349Z",
+        "updatedAt": "2019-07-30T20:22:59.349Z",
+        "id": 307,
+        "name": "Electricity",
+        "description": "Amount on Electricity Bill",
+        "type": "expense",
+        "budget": 400,
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "User 1",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
+                ]
+            },
+            "owner": 33
+        },
+        "parent": {
+            "createdAt": "2019-07-30T20:21:10.270Z",
+            "updatedAt": "2019-07-30T20:21:10.270Z",
+            "id": 305,
+            "name": "Ammenities",
+            "description": "Amount spent on basic and necessary amenities",
+            "type": "expense",
+            "budget": 2000,
+            "org": 34,
+            "parent": null
+        }
+    },
+    {
+        "createdAt": "2019-07-31T13:53:16.354Z",
+        "updatedAt": "2019-07-31T13:53:16.354Z",
+        "id": 313,
+        "name": "Internet",
+        "description": "Amount on Internet Bill",
+        "type": "expense",
+        "budget": 300,
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "User 1",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
+                ]
+            },
+            "owner": 33
+        },
+        "parent": {
+            "createdAt": "2019-07-30T20:21:10.270Z",
+            "updatedAt": "2019-07-30T20:21:10.270Z",
+            "id": 305,
+            "name": "Ammenities",
+            "description": "Amount spent on basic and necessary amenities",
+            "type": "expense",
+            "budget": 2000,
+            "org": 34,
+            "parent": null
+        }
+    }
+]
+```
+ 
+Represents categories under which your transactions are grouped like income, expense, etc.
+Can have sub-categories as a further split up on need basis.
+
+### transactions schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+org | org | organisation of the user 
+parent | category | incase of a subcategory entry it has to have a parent category
+name | string(required) | name of the category
+description | string | description of the category
+type | string | type of category (income or expense)
+budget | number | amount allocated for the category
+
+### Query Parameters
+ 
+Parameter | Description
+--------- | -----------
+id(required) | id associated with the category to retrieve.
