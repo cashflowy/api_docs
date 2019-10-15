@@ -431,7 +431,7 @@ id(required) | id associated with the transaction to retrieve.
 
 ```
 /categories
-/transactionscategories/:id
+/categories/:id
 ```
 
 > GET /categories
@@ -547,10 +547,10 @@ request(options, function (error, response, body) {
 ]
 ```
  
-Represents categories under which your transactions are grouped like income, expense, etc.
+Represents categories under which your budgets- income or expenses are grouped like income, expense, etc.
 Can have sub-categories as a further split up on need basis.
 
-### transactions schema
+### categories schema
 
 Attribute | Type | Description
 --------- | ---- | -----------
@@ -566,3 +566,110 @@ budget | number | amount allocated for the category
 Parameter | Description
 --------- | -----------
 id(required) | id associated with the category to retrieve.
+
+## Tags
+> ENDPOINTS
+
+```
+/tags
+/tags/:id
+```
+
+> GET /tags
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/tags
+  -H 'Authorization: Bearer cashflowyApiKey' 
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/tags',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey'} };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "transactions": [
+            {
+                "createdAt": "2019-07-29T19:48:31.107Z",
+                "updatedAt": "2019-09-16T04:14:27.608Z",
+                "id": 9978,
+                "original_currency": "INR",
+                "original_amount": 12776,
+                "amount_inr": 12776,
+                "occuredAt": "2019-06-28T00:00:00.000Z",
+                "type": "income_expense",
+                "description": "Repaid Credit card bill",
+                "third_party": "IMPS PMT 917911409628 9229 (Ref# 00000000000628011823513)",
+                "account": 120,
+                "to_account": null,
+                "category": null,
+                "transaction_event": 10522,
+                "transaction_group": 10639
+            }
+        ],
+        "createdAt": "2019-07-29T20:10:36.702Z",
+        "updatedAt": "2019-07-29T20:10:36.702Z",
+        "id": 40,
+        "name": "Repay_Hdfc",
+        "description": "Repayment of credit card",
+        "type": "user",
+        "color": "teal",
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "User 1",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
+                ]
+            },
+            "owner": 33
+        }
+    }
+]
+```
+ 
+Represents tags under which transactions are marked by user.
+
+### tags schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+org | org | some tags can be globally defined;some tags can be specific to a user, while some tags can be global,this field only need when type=user
+name | string(required) | name of the tag
+description | string | description of the tag
+type | string | user or global
+color  | string | color of the tag; defaults to "teal"
+transactions | transaction | transaction which is tagged
+
+### Query Parameters
+ 
+Parameter | Description
+--------- | -----------
+id(required) | id associated with the tag to retrieve.
