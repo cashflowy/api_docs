@@ -228,6 +228,9 @@
                   <li>
                     <a href="#org" class="toc-h2 toc-link" data-title="Org">Org</a>
                   </li>
+                  <li>
+                    <a href="#common-attributes" class="toc-h2 toc-link" data-title="Common Attributes">Common Attributes</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -419,6 +422,25 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
 <aside class="notice">
 It is mandatory to have the org endpoint before making an api call for fetching or posting any information.
 </aside>
+<h2 id='common-attributes'>Common Attributes</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
+</tbody></table>
 <h1 id='objects'>Objects</h1>
 <p>Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.</p>
 <h2 id='accounts'>Accounts</h2>
@@ -571,12 +593,49 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id(required)</td>
-<td>id associated with the account to retrieve.</td>
+<td>string</td>
+<td>id associated with the account to retrieve</td>
+</tr>
+<tr>
+<td>populate</td>
+<td>string</td>
+<td>If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated.</td>
+</tr>
+<tr>
+<td>select</td>
+<td>string?</td>
+<td>The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=name,org</td>
+</tr>
+<tr>
+<td>omit</td>
+<td>string?</td>
+<td>The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.</td>
+</tr>
+<tr>
+<td>where</td>
+<td>string?</td>
+<td>Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={&quot;name&quot;:{&quot;contains&quot;:&quot;ICICI&quot;}}</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number?</td>
+<td>The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. <code>?limit=100</code></td>
+</tr>
+<tr>
+<td>skip</td>
+<td>number?</td>
+<td>The number of records to skip (useful for pagination). e.g. <code>?skip=30</code></td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string?</td>
+<td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ?sort=lastName%20ASC</td>
 </tr>
 </tbody></table>
 <h2 id='transactions'>Transactions</h2>
@@ -774,12 +833,49 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id(required)</td>
+<td>string</td>
 <td>id associated with the transaction to retrieve.</td>
+</tr>
+<tr>
+<td>populate</td>
+<td>string</td>
+<td>If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated.</td>
+</tr>
+<tr>
+<td>select</td>
+<td>string?</td>
+<td>The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=third_party</td>
+</tr>
+<tr>
+<td>omit</td>
+<td>string?</td>
+<td>The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select. e.g. ?omit=amount_inr</td>
+</tr>
+<tr>
+<td>where</td>
+<td>string?</td>
+<td>Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={&quot;name&quot;:{&quot;contains&quot;:&quot;ICICI&quot;}}</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number?</td>
+<td>The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. <code>?limit=100</code></td>
+</tr>
+<tr>
+<td>skip</td>
+<td>number?</td>
+<td>The number of records to skip (useful for pagination). e.g. <code>?skip=30</code></td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string?</td>
+<td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. <code>?sort=createdAt%20ASC</code></td>
 </tr>
 </tbody></table>
 <h2 id='categories'>Categories</h2>
@@ -942,12 +1038,49 @@ Can have sub-categories as a further split up on need basis.</p>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id(required)</td>
+<td>string</td>
 <td>id associated with the category to retrieve.</td>
+</tr>
+<tr>
+<td>populate</td>
+<td>string</td>
+<td>If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated.</td>
+</tr>
+<tr>
+<td>select</td>
+<td>string?</td>
+<td>The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. <code>?select=type</code></td>
+</tr>
+<tr>
+<td>omit</td>
+<td>string?</td>
+<td>The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.  e.g. <code>?omit=budget</code></td>
+</tr>
+<tr>
+<td>where</td>
+<td>string?</td>
+<td>Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.   e.g. <code>?where={&quot;description&quot;:{&quot;contains&quot;:&quot;Electricity&quot;}}</code></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number?</td>
+<td>The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. <code>?limit=100</code></td>
+</tr>
+<tr>
+<td>skip</td>
+<td>number?</td>
+<td>The number of records to skip (useful for pagination). e.g. <code>?skip=30</code></td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string?</td>
+<td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. <code>?sort=createdAt%20ASC</code></td>
 </tr>
 </tbody></table>
 <h2 id='tags'>Tags</h2>
@@ -1076,12 +1209,49 @@ Can have sub-categories as a further split up on need basis.</p>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id(required)</td>
+<td>string</td>
 <td>id associated with the tag to retrieve.</td>
+</tr>
+<tr>
+<td>populate</td>
+<td>string</td>
+<td>If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated.</td>
+</tr>
+<tr>
+<td>select</td>
+<td>string?</td>
+<td>The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. <code>?select=type</code></td>
+</tr>
+<tr>
+<td>omit</td>
+<td>string?</td>
+<td>The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.  e.g. <code>?omit=budget</code></td>
+</tr>
+<tr>
+<td>where</td>
+<td>string?</td>
+<td>Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.   e.g. <code>?where={&quot;description&quot;:{&quot;contains&quot;:&quot;Repayment&quot;}}</code></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number?</td>
+<td>The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. <code>?limit=100</code></td>
+</tr>
+<tr>
+<td>skip</td>
+<td>number?</td>
+<td>The number of records to skip (useful for pagination). e.g. <code>?skip=30</code></td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string?</td>
+<td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. <code>?sort=createdAt%20ASC</code></td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
