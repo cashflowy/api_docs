@@ -144,6 +144,13 @@ members | member | members of the organization
 It is mandatory to have the org endpoint before making an api call for fetching or posting any information.
 </aside>
 
+## Common Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
+
 # Objects
 Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.
  
@@ -275,11 +282,17 @@ statements | statement | statements related to account
 
 ### Query Parameters
  
-Parameter | Description
---------- | -----------
-id(required) | id associated with the account to retrieve.
+Parameter |Type | Description
+--------- | ---- | -----------
+id(required)| string | id associated with the account to retrieve
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=name,org
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={"name":{"contains":"ICICI"}}
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ?sort=lastName%20ASC
 
- 
 ## Transactions
 > ENDPOINTS
 
@@ -421,9 +434,17 @@ transaction_group | transaction_group| grouping of transaction
 
 ### Query Parameters
  
-Parameter | Description
---------- | -----------
-id(required) | id associated with the transaction to retrieve.
+Parameter | Type | Description
+--------- | ---- | -----------
+id(required) | string | id associated with the transaction to retrieve.
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=third_party 
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select. e.g. ?omit=amount_inr
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={"name":{"contains":"ICICI"}}
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ``?sort=createdAt%20ASC``
+
 
 
 ## Categories
@@ -563,9 +584,16 @@ budget | number | amount allocated for the category
 
 ### Query Parameters
  
-Parameter | Description
---------- | -----------
-id(required) | id associated with the category to retrieve.
+Parameter | Type | Description
+--------- | ---- | -----------
+id(required) | string | id associated with the category to retrieve.
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. `?select=type`
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.  e.g. `?omit=budget`
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.   e.g. `?where={"description":{"contains":"Electricity"}}`
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. `?sort=createdAt%20ASC`
 
 ## Tags
 > ENDPOINTS
@@ -670,6 +698,13 @@ transactions | transaction | transaction which is tagged
 
 ### Query Parameters
  
-Parameter | Description
---------- | -----------
-id(required) | id associated with the tag to retrieve.
+Parameter | Type | Description
+--------- | ---- | -----------
+id(required) | string | id associated with the tag to retrieve.
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. `?select=type`
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.  e.g. `?omit=budget`
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.   e.g. `?where={"description":{"contains":"Repayment"}}`
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. `?sort=createdAt%20ASC`
