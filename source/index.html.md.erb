@@ -154,6 +154,70 @@ updatedAt | timestamp | time at which the object was updated
 # Objects
 Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.
  
+## Parsed Emails
+ 
+> ENDPOINTS
+
+```
+/parsed_emails
+/parsed_emails/:id
+```
+
+> GET /parsed_emails
+
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/parsed_emails
+  -H 'Authorization: Bearer cashflowyApiKey'
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/parsed_emails',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+> Response json
+ 
+```json
+        [
+            {
+
+            }
+        ]
+ ```
+
+Parsed Emails contains data successfully parsed and extracted by Cashflowy or the failed ones.
+
+### parsed emails schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+extracted_data| json(required) | data originally extracted from email
+type | josn(required)| the processed version of extracted data
+emails | string | email id of the user/org
+org | org(required) | org of the user
+type | string(required) | type of email sent for parsing. Can be of types: 'credit_card_alert','credit_card_statement','bank_transaction_alert','bank_statement'
+body_parser_used | string | type of parser used
+message_id | string(required) | unique id associated 
+transaction_event | transaction_event | the accociated transaction(required is true, but when initially created, it is created without a ref to transaction)
+details | json | details regarding the parsed_emails
+
+### Query Parameters
+ 
+Parameter |Type | Description
+--------- | ---- | -----------
+id(required)| string | id associated with the parsed email to retrieve
+
 ## Accounts
  
 > ENDPOINTS
