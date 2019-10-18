@@ -237,6 +237,9 @@
             <a href="#objects" class="toc-h1 toc-link" data-title="Objects">Objects</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#parsed-emails" class="toc-h2 toc-link" data-title="Parsed Emails">Parsed Emails</a>
+                  </li>
+                  <li>
                     <a href="#accounts" class="toc-h2 toc-link" data-title="Accounts">Accounts</a>
                   </li>
                   <li>
@@ -443,6 +446,111 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 </tbody></table>
 <h1 id='objects'>Objects</h1>
 <p>Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.</p>
+<h2 id='parsed-emails'>Parsed Emails</h2>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/parsed_emails
+/parsed_emails/:id
+</code></pre>
+<blockquote>
+<p>GET /parsed_emails</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://app.cashflowy.in/api/org/:o_id/parsed_emails
+  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/parsed_emails'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> 
+   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span> <span class="p">}</span> <span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>Response json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">        </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Parsed Emails contains data successfully parsed and extracted by Cashflowy or the failed ones.</p>
+<h3 id='parsed-emails-schema'>parsed emails schema</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>extracted_data</td>
+<td>json(required)</td>
+<td>data originally extracted from email</td>
+</tr>
+<tr>
+<td>type</td>
+<td>josn(required)</td>
+<td>the processed version of extracted data</td>
+</tr>
+<tr>
+<td>emails</td>
+<td>string</td>
+<td>email id of the user/org</td>
+</tr>
+<tr>
+<td>org</td>
+<td>org(required)</td>
+<td>org of the user</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string(required)</td>
+<td>type of email sent for parsing. Can be of types: &#39;credit_card_alert&#39;,&#39;credit_card_statement&#39;,&#39;bank_transaction_alert&#39;,&#39;bank_statement&#39;</td>
+</tr>
+<tr>
+<td>body_parser_used</td>
+<td>string</td>
+<td>type of parser used</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>string(required)</td>
+<td>unique id associated</td>
+</tr>
+<tr>
+<td>transaction_event</td>
+<td>transaction_event</td>
+<td>the accociated transaction(required is true, but when initially created, it is created without a ref to transaction)</td>
+</tr>
+<tr>
+<td>details</td>
+<td>json</td>
+<td>details regarding the parsed_emails</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id(required)</td>
+<td>string</td>
+<td>id associated with the parsed email to retrieve</td>
+</tr>
+</tbody></table>
 <h2 id='accounts'>Accounts</h2>
 <blockquote>
 <p>ENDPOINTS</p>
@@ -589,7 +697,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <td>statements related to account</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters'>Query Parameters</h3>
+<h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -829,7 +937,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <td>grouping of transaction</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1034,7 +1142,7 @@ Can have sub-categories as a further split up on need basis.</p>
 <td>amount allocated for the category</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h3 id='query-parameters-4'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1205,7 +1313,7 @@ Can have sub-categories as a further split up on need basis.</p>
 <td>transaction which is tagged</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-4'>Query Parameters</h3>
+<h3 id='query-parameters-5'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
