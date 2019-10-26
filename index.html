@@ -231,13 +231,24 @@
               </ul>
           </li>
           <li>
+            <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#transactions-schema" class="toc-h2 toc-link" data-title="Transactions schema">Transactions schema</a>
+                  </li>
+                  <li>
+                    <a href="#query-parameters" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#parsed-emails" class="toc-h1 toc-link" data-title="Parsed Emails">Parsed Emails</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#parsed-emails-schema" class="toc-h2 toc-link" data-title="Parsed emails schema">Parsed emails schema</a>
                   </li>
                   <li>
-                    <a href="#query-parameters" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                    <a href="#query-parameters-2" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
                   </li>
               </ul>
           </li>
@@ -248,18 +259,18 @@
                     <a href="#account-schema" class="toc-h2 toc-link" data-title="Account schema">Account schema</a>
                   </li>
                   <li>
-                    <a href="#query-parameters-2" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                    <a href="#query-parameters-3" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
+            <a href="#snapshots" class="toc-h1 toc-link" data-title="Snapshots">Snapshots</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#transactions-schema" class="toc-h2 toc-link" data-title="Transactions schema">Transactions schema</a>
+                    <a href="#snapshots-schema" class="toc-h2 toc-link" data-title="Snapshots schema">Snapshots schema</a>
                   </li>
                   <li>
-                    <a href="#query-parameters-3" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                    <a href="#query-parameters-4" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
                   </li>
               </ul>
           </li>
@@ -270,7 +281,7 @@
                     <a href="#categories-schema" class="toc-h2 toc-link" data-title="Categories schema">Categories schema</a>
                   </li>
                   <li>
-                    <a href="#query-parameters-4" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                    <a href="#query-parameters-5" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
                   </li>
               </ul>
           </li>
@@ -281,7 +292,7 @@
                     <a href="#tags-schema" class="toc-h2 toc-link" data-title="Tags schema">Tags schema</a>
                   </li>
                   <li>
-                    <a href="#query-parameters-5" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                    <a href="#query-parameters-6" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
                   </li>
               </ul>
           </li>
@@ -448,336 +459,6 @@ You must replace <code>cashflowyApiKey</code> with your personal API key.
 <aside class="notice">
 It is mandatory to have the org endpoint <code>/org/:o_id</code> added before making an api call for fetching or posting any information.
 </aside>
-<h1 id='parsed-emails'>Parsed Emails</h1>
-<blockquote>
-<p>ENDPOINTS</p>
-</blockquote>
-<pre class="highlight plaintext"><code>/parsed_emails
-/parsed_emails/:id
-</code></pre>
-<blockquote>
-<p>GET /parsed_emails</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  https://app.cashflowy.in/api/org/:o_id/parsed_emails
-  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/parsed_emails'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> 
-   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span> <span class="p">}</span> <span class="p">};</span>
-
-<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-
-</code></pre>
-<blockquote>
-<p>Response json</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">        </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>Parsed Emails contains data successfully parsed and extracted by Cashflowy or the failed ones.</p>
-<h3 id='parsed-emails-schema'>Parsed emails schema</h3>
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>unique id associated with the object</td>
-</tr>
-<tr>
-<td>createdAt</td>
-<td>timestamp</td>
-<td>time at which the object was created</td>
-</tr>
-<tr>
-<td>updatedAt</td>
-<td>timestamp</td>
-<td>time at which the object was updated</td>
-</tr>
-<tr>
-<td>extracted_data</td>
-<td>json(required)</td>
-<td>data originally extracted from email</td>
-</tr>
-<tr>
-<td>type</td>
-<td>josn(required)</td>
-<td>the processed version of extracted data</td>
-</tr>
-<tr>
-<td>emails</td>
-<td>string</td>
-<td>email id of the user/org</td>
-</tr>
-<tr>
-<td>org</td>
-<td>org(required)</td>
-<td>org of the user</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string(required)</td>
-<td>type of email sent for parsing. Can be of types: &#39;credit_card_alert&#39;,&#39;credit_card_statement&#39;,&#39;bank_transaction_alert&#39;,&#39;bank_statement&#39;</td>
-</tr>
-<tr>
-<td>body_parser_used</td>
-<td>string</td>
-<td>type of parser used</td>
-</tr>
-<tr>
-<td>message_id</td>
-<td>string(required)</td>
-<td>unique id associated</td>
-</tr>
-<tr>
-<td>transaction_event</td>
-<td>transaction_event</td>
-<td>the accociated transaction(required is true, but when initially created, it is created without a ref to transaction)</td>
-</tr>
-<tr>
-<td>details</td>
-<td>json</td>
-<td>details regarding the parsed_emails</td>
-</tr>
-</tbody></table>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id(required)</td>
-<td>string</td>
-<td>id associated with the parsed email to retrieve</td>
-</tr>
-</tbody></table>
-<h1 id='accounts'>Accounts</h1>
-<blockquote>
-<p>ENDPOINTS</p>
-</blockquote>
-<pre class="highlight plaintext"><code>/accounts
-/accounts/:id
-</code></pre>
-<blockquote>
-<p>GET /accounts</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  https://app.cashflowy.in/api/org/:o_id/accounts
-  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
-
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/accounts'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> 
-   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span> <span class="p">}</span> <span class="p">};</span>
-
-<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-
-</code></pre>
-<blockquote>
-<p>Response json</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"statements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.671Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:37:43.845Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"last_snapshot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.685Z"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.685Z"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3859</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"createdBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parsed_email"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-                </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">5781.17</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"takenAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:14.000Z"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ICICIxxx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"acc_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"301"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"default_account"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
-                </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"statements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T19:49:38.483Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T19:49:38.483Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cash"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cash Account"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"acc_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"default_account"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
-                </span><span class="p">]</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>Account contains financial information and statements.</p>
-<h3 id='account-schema'>Account schema</h3>
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>unique id associated with the object</td>
-</tr>
-<tr>
-<td>createdAt</td>
-<td>timestamp</td>
-<td>time at which the object was created</td>
-</tr>
-<tr>
-<td>updatedAt</td>
-<td>timestamp</td>
-<td>time at which the object was updated</td>
-</tr>
-<tr>
-<td>org</td>
-<td>org(required)</td>
-<td>The name of the organization</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string(required)</td>
-<td>type of account</td>
-</tr>
-<tr>
-<td>details</td>
-<td>string</td>
-<td>details of the account</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>account name</td>
-</tr>
-<tr>
-<td>acc_number</td>
-<td>string(required)</td>
-<td>number associated with the account</td>
-</tr>
-<tr>
-<td>statements</td>
-<td>statement</td>
-<td>statements related to account</td>
-</tr>
-</tbody></table>
-<h3 id='query-parameters-2'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id(required)</td>
-<td>string</td>
-<td>id associated with the account to retrieve</td>
-</tr>
-<tr>
-<td>populate</td>
-<td>string</td>
-<td>If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated.</td>
-</tr>
-<tr>
-<td>select</td>
-<td>string?</td>
-<td>The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=name,org</td>
-</tr>
-<tr>
-<td>omit</td>
-<td>string?</td>
-<td>The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.</td>
-</tr>
-<tr>
-<td>where</td>
-<td>string?</td>
-<td>Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={&quot;name&quot;:{&quot;contains&quot;:&quot;ICICI&quot;}}</td>
-</tr>
-<tr>
-<td>limit</td>
-<td>number?</td>
-<td>The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. <code>?limit=100</code></td>
-</tr>
-<tr>
-<td>skip</td>
-<td>number?</td>
-<td>The number of records to skip (useful for pagination). e.g. <code>?skip=30</code></td>
-</tr>
-<tr>
-<td>sort</td>
-<td>string?</td>
-<td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ?sort=lastName%20ASC</td>
-</tr>
-</tbody></table>
 <h1 id='transactions'>Transactions</h1>
 <blockquote>
 <p>ENDPOINTS</p>
@@ -984,7 +665,7 @@ It is mandatory to have the org endpoint <code>/org/:o_id</code> added before ma
 <td>grouping of transaction</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -996,6 +677,603 @@ It is mandatory to have the org endpoint <code>/org/:o_id</code> added before ma
 <td>id(required)</td>
 <td>string</td>
 <td>id associated with the transaction to retrieve.</td>
+</tr>
+<tr>
+<td>populate</td>
+<td>string</td>
+<td>If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated.</td>
+</tr>
+<tr>
+<td>select</td>
+<td>string?</td>
+<td>The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=third_party</td>
+</tr>
+<tr>
+<td>omit</td>
+<td>string?</td>
+<td>The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select. e.g. ?omit=amount_inr</td>
+</tr>
+<tr>
+<td>where</td>
+<td>string?</td>
+<td>Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={&quot;name&quot;:{&quot;contains&quot;:&quot;ICICI&quot;}}</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number?</td>
+<td>The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. <code>?limit=100</code></td>
+</tr>
+<tr>
+<td>skip</td>
+<td>number?</td>
+<td>The number of records to skip (useful for pagination). e.g. <code>?skip=30</code></td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string?</td>
+<td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. <code>?sort=createdAt%20ASC</code></td>
+</tr>
+</tbody></table>
+<h1 id='parsed-emails'>Parsed Emails</h1>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/parsed_emails
+/parsed_emails/:id
+</code></pre>
+<blockquote>
+<p>GET /parsed_emails</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://app.cashflowy.in/api/org/:o_id/parsed_emails
+  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/parsed_emails'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> 
+   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span> <span class="p">}</span> <span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>Response json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">        </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Parsed Emails contains data successfully parsed and extracted by Cashflowy or the failed ones.</p>
+<h3 id='parsed-emails-schema'>Parsed emails schema</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>unique id associated with the object</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
+<tr>
+<td>extracted_data</td>
+<td>json(required)</td>
+<td>data originally extracted from email</td>
+</tr>
+<tr>
+<td>type</td>
+<td>josn(required)</td>
+<td>the processed version of extracted data</td>
+</tr>
+<tr>
+<td>emails</td>
+<td>string</td>
+<td>email id of the user/org</td>
+</tr>
+<tr>
+<td>org</td>
+<td>org(required)</td>
+<td>org of the user</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string(required)</td>
+<td>type of email sent for parsing. Can be of types: &#39;credit_card_alert&#39;,&#39;credit_card_statement&#39;,&#39;bank_transaction_alert&#39;,&#39;bank_statement&#39;</td>
+</tr>
+<tr>
+<td>body_parser_used</td>
+<td>string</td>
+<td>type of parser used</td>
+</tr>
+<tr>
+<td>message_id</td>
+<td>string(required)</td>
+<td>unique id associated</td>
+</tr>
+<tr>
+<td>transaction_event</td>
+<td>transaction_event</td>
+<td>the accociated transaction(required is true, but when initially created, it is created without a ref to transaction)</td>
+</tr>
+<tr>
+<td>details</td>
+<td>json</td>
+<td>details regarding the parsed_emails</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id(required)</td>
+<td>string</td>
+<td>id associated with the parsed email to retrieve</td>
+</tr>
+</tbody></table>
+<h1 id='accounts'>Accounts</h1>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/accounts
+/accounts/:id
+</code></pre>
+<blockquote>
+<p>GET /accounts</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://app.cashflowy.in/api/org/:o_id/accounts
+  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/accounts'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> 
+   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span> <span class="p">}</span> <span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>Response json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"statements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.671Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:37:43.845Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"last_snapshot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.685Z"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.685Z"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3859</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"createdBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parsed_email"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">5781.17</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"takenAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:14.000Z"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ICICIxxx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acc_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"301"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"default_account"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"statements"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T19:49:38.483Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T19:49:38.483Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cash"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cash Account"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"acc_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-25T09:30:53.169Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T21:56:04.366+00:00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"default_account"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timezone_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-330</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"default_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"statement_passwords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"05XXXXXXXXX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"XXXXXXXX"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Account contains financial information and statements.</p>
+<h3 id='account-schema'>Account schema</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>unique id associated with the object</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
+<tr>
+<td>org</td>
+<td>org(required)</td>
+<td>The name of the organization</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string(required)</td>
+<td>type of account</td>
+</tr>
+<tr>
+<td>details</td>
+<td>string</td>
+<td>details of the account</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>account name</td>
+</tr>
+<tr>
+<td>acc_number</td>
+<td>string(required)</td>
+<td>number associated with the account</td>
+</tr>
+<tr>
+<td>statements</td>
+<td>statement</td>
+<td>statements related to account</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id(required)</td>
+<td>string</td>
+<td>id associated with the account to retrieve</td>
+</tr>
+<tr>
+<td>populate</td>
+<td>string</td>
+<td>If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated.</td>
+</tr>
+<tr>
+<td>select</td>
+<td>string?</td>
+<td>The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=name,org</td>
+</tr>
+<tr>
+<td>omit</td>
+<td>string?</td>
+<td>The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.</td>
+</tr>
+<tr>
+<td>where</td>
+<td>string?</td>
+<td>Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={&quot;name&quot;:{&quot;contains&quot;:&quot;ICICI&quot;}}</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number?</td>
+<td>The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. <code>?limit=100</code></td>
+</tr>
+<tr>
+<td>skip</td>
+<td>number?</td>
+<td>The number of records to skip (useful for pagination). e.g. <code>?skip=30</code></td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string?</td>
+<td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ?sort=lastName%20ASC</td>
+</tr>
+</tbody></table>
+<h1 id='snapshots'>Snapshots</h1>
+<blockquote>
+<p>ENDPOINTS</p>
+</blockquote>
+<pre class="highlight plaintext"><code>/snapshots
+/snapshots/:id
+</code></pre>
+<blockquote>
+<p>GET /snapshots</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://app.cashflowy.in/api/org/:o_id/snapshots
+  -H <span class="s1">'Authorization: Bearer cashflowyApiKey'</span> 
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://app.cashflowy.in/api/org/:o_id/snapshots'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> 
+   <span class="p">{</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer cashflowyApiKey'</span><span class="p">}</span> <span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>Response json</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-03-01T10:45:43.000Z"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-03-24T06:02:18.000Z"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"predicted_category"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"category predicted by aws ml"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"global"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grey"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"documents"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-08T01:16:38.220Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T01:17:55.835Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10106</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">-110</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount_inr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-110</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"occuredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-07T08:15:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"income_expense"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hakka Noodles and Chilli Chicken"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"third_party"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Eat Fit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.671Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:37:43.845Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"last_snapshot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.685Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:28.685Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3859</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"createdBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parsed_email"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">5781.17</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"takenAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-29T19:35:14.000Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ICICI301"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"acc_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"301"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"to_account"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T20:19:59.777Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T20:19:59.777Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">304</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Food"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amount spend on Food"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"expense"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">7500</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"transaction_event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-08T01:16:38.215Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T01:17:55.032Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10650</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"original_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"original_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">-110</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_inr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-110</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"occuredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-07T08:20:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"income_expense"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"third_party"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Eat Fit"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">119</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"to_account"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"transaction_group"</span><span class="p">:</span><span class="w"> </span><span class="mi">7146</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"transaction_group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T01:17:54.299Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T01:17:54.299Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7146</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"documents"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-31T12:53:14.160Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T04:16:23.112Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10017</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"original_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount_inr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"occuredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-03T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"income_expense"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"third_party"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UPI/915460052360/Payment from Ph/paytmqr28100505/P aytm Payments/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T19:38:52.921Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T19:38:53.691Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"last_snapshot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T19:38:53.678Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-30T19:38:53.678Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3889</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"createdBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parsed_document"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">41971.1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"takenAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-29T18:29:59.999Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auto Generated: 5301"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"acc_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5301"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"org"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"to_account"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"transaction_event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-31T12:53:14.140Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T04:16:22.452Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10561</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"original_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"original_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"amount_inr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-100</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"occuredAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-03T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"income_expense"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parsed_statement"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"third_party"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UPI/915460052360/Payment from Ph/paytmqr28100505/P aytm Payments/"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"to_account"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"transaction_group"</span><span class="p">:</span><span class="w"> </span><span class="mi">10673</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"transaction_group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T04:16:21.549Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-16T04:16:21.549Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10673</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Contains data related to snapshots. Snapshot tells the store of value/balance of an account at any given point of time.</p>
+<h3 id='snapshots-schema'>Snapshots schema</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>unique id associated with the object</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
+<tr>
+<td>account</td>
+<td>account(required)</td>
+<td>account to which the snapshot is related</td>
+</tr>
+<tr>
+<td>createdBy</td>
+<td>string</td>
+<td>user or parsed email or parsed statement</td>
+</tr>
+<tr>
+<td>details</td>
+<td>string</td>
+<td>details regarding snapshot</td>
+</tr>
+<tr>
+<td>balance</td>
+<td>number(required)</td>
+<td>the balance in an account</td>
+</tr>
+<tr>
+<td>takenAt</td>
+<td>ref</td>
+<td>defaults to createdAt. Useful when creating manually.</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id(required)</td>
+<td>string</td>
+<td>id associated with the snapshot to retrieve.</td>
 </tr>
 <tr>
 <td>populate</td>
@@ -1204,7 +1482,7 @@ Can have sub-categories as a further split up on need basis.</p>
 <td>amount allocated for the category</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-4'>Query Parameters</h3>
+<h3 id='query-parameters-5'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1390,7 +1668,7 @@ Can have sub-categories as a further split up on need basis.</p>
 <td>transaction which is tagged</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-5'>Query Parameters</h3>
+<h3 id='query-parameters-6'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
