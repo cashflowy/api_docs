@@ -138,6 +138,162 @@ members | member | members of the organization
 It is mandatory to have the org endpoint <code>/org/:o_id</code> added before making an api call for fetching or posting any information.
 </aside>
 
+# Transactions
+> ENDPOINTS
+
+```
+/transactions
+/transactions/:id
+```
+
+> GET /transactions
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/transactions
+  -H 'Authorization: Bearer cashflowyApiKey' 
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/transactions',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey'} };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "tags": [
+            {
+                "createdAt": "2019-03-01T10:45:43.000Z",
+                "updatedAt": "2019-03-24T06:02:18.000Z",
+                "id": 17,
+                "name": "predicted_category",
+                "description": "category predicted by aws ml",
+                "type": "global",
+                "color": "grey",
+                "org": null
+            }
+        ],
+        "documents": [],
+        "createdAt": "2019-08-08T01:16:38.220Z",
+        "updatedAt": "2019-09-16T01:17:55.835Z",
+        "id": 10106,
+        "original_currency": "INR",
+        "original_amount": -110,
+        "amount_inr": -110,
+        "occuredAt": "2019-08-07T08:15:00.000Z",
+        "type": "income_expense",
+        "description": "Hakka Noodles and Chilli Chicken",
+        "third_party": "Eat Fit",
+        "account": {
+            "createdAt": "2019-07-29T19:35:28.671Z",
+            "updatedAt": "2019-07-29T19:37:43.845Z",
+            "id": 119,
+            "type": "bank",
+            "details": {
+                "last_snapshot": {
+                    "createdAt": "2019-07-29T19:35:28.685Z",
+                    "updatedAt": "2019-07-29T19:35:28.685Z",
+                    "id": 3859,
+                    "createdBy": "parsed_email",
+                    "details": {},
+                    "balance": 5781.17,
+                    "takenAt": "2019-07-29T19:35:14.000Z",
+                    "account": 119
+                }
+            },
+            "name": "ICICIxxx",
+            "acc_number": "301",
+            "org": 34
+        },
+        "to_account": null,
+        "category": {
+            "createdAt": "2019-07-30T20:19:59.777Z",
+            "updatedAt": "2019-07-30T20:19:59.777Z",
+            "id": 304,
+            "name": "Food",
+            "description": "Amount spend on Food",
+            "type": "expense",
+            "budget": 7500,
+            "org": 34,
+            "parent": null
+        },
+        "transaction_event": {
+            "createdAt": "2019-08-08T01:16:38.215Z",
+            "updatedAt": "2019-09-16T01:17:55.032Z",
+            "id": 10650,
+            "original_currency": "INR",
+            "original_amount": -110,
+            "amount_inr": -110,
+            "occuredAt": "2019-08-07T08:20:00.000Z",
+            "type": "income_expense",
+            "createdBy": "user",
+            "third_party": "Eat Fit",
+            "account": 119,
+            "to_account": null,
+            "transaction_group": 7146
+        },
+        "transaction_group": {
+            "createdAt": "2019-09-16T01:17:54.299Z",
+            "updatedAt": "2019-09-16T01:17:54.299Z",
+            "id": 7146
+        }
+    }
+  ]
+```
+ 
+Represents all transactional data.
+
+### Transactions schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
+original_currency | string | currency in which transaction is made
+original_amount | number | amount of thetransaction
+amount_inr | number | amount in inr
+occuredAt | ref | defaults to createdAt. Useful when creating manually. 
+type | string | type of transaction 'income_expense' or 'transfer'
+description | string | description of the transaction
+account | account(required) | account from where transaction is made
+to_account | account | only for transfers. The account to which you transferred the money to.
+third_party | string | only for income/expense 
+category | category | to which category the transaction belongs
+tags | tag(collection) | tag used to mark transaction
+transactional_event | transactional_event(required) | what is the transactional event 
+documents | document | documents supporting the transacton
+transaction_group | transaction_group| grouping of transaction
+
+
+### Query Parameters
+ 
+Parameter | Type | Description
+--------- | ---- | -----------
+id(required) | string | id associated with the transaction to retrieve.
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=third_party 
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select. e.g. ?omit=amount_inr
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={"name":{"contains":"ICICI"}}
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ``?sort=createdAt%20ASC``
+
+
 # Parsed Emails
  
 > ENDPOINTS
@@ -348,19 +504,19 @@ limit | number? | The maximum number of records to send back (useful for paginat
 skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
 sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ?sort=lastName%20ASC
 
-# Transactions
+# Snapshots
 > ENDPOINTS
 
 ```
-/transactions
-/transactions/:id
+/snapshots
+/snapshots/:id
 ```
 
-> GET /transactions
+> GET /snapshots
  
 ```shell
 curl -X GET \
-  https://app.cashflowy.in/api/org/:o_id/transactions
+  https://app.cashflowy.in/api/org/:o_id/snapshots
   -H 'Authorization: Bearer cashflowyApiKey' 
 ```
  
@@ -368,7 +524,7 @@ curl -X GET \
 var request = require("request");
 
 var options = { method: 'GET',
-  url: 'https://app.cashflowy.in/api/org/:o_id/transactions',
+  url: 'https://app.cashflowy.in/api/org/:o_id/snapshots',
   headers: 
    { Authorization: 'Bearer cashflowyApiKey'} };
 
@@ -425,7 +581,7 @@ request(options, function (error, response, body) {
                     "account": 119
                 }
             },
-            "name": "ICICIxxx",
+            "name": "ICICI301",
             "acc_number": "301",
             "org": 34
         },
@@ -461,40 +617,87 @@ request(options, function (error, response, body) {
             "updatedAt": "2019-09-16T01:17:54.299Z",
             "id": 7146
         }
-    }
-  ]
+    },
+    {
+        "tags": [],
+        "documents": [],
+        "createdAt": "2019-07-31T12:53:14.160Z",
+        "updatedAt": "2019-09-16T04:16:23.112Z",
+        "id": 10017,
+        "original_currency": "INR",
+        "original_amount": -100,
+        "amount_inr": -100,
+        "occuredAt": "2019-06-03T00:00:00.000Z",
+        "type": "income_expense",
+        "description": null,
+        "third_party": "UPI/915460052360/Payment from Ph/paytmqr28100505/P aytm Payments/",
+        "account": {
+            "createdAt": "2019-07-30T19:38:52.921Z",
+            "updatedAt": "2019-07-30T19:38:53.691Z",
+            "id": 123,
+            "type": "bank",
+            "details": {
+                "last_snapshot": {
+                    "createdAt": "2019-07-30T19:38:53.678Z",
+                    "updatedAt": "2019-07-30T19:38:53.678Z",
+                    "id": 3889,
+                    "createdBy": "parsed_document",
+                    "details": {},
+                    "balance": 41971.1,
+                    "takenAt": "2019-06-29T18:29:59.999Z",
+                    "account": 123
+                }
+            },
+            "name": "Auto Generated: 5301",
+            "acc_number": "5301",
+            "org": 34
+        },
+        "to_account": null,
+        "category": null,
+        "transaction_event": {
+            "createdAt": "2019-07-31T12:53:14.140Z",
+            "updatedAt": "2019-09-16T04:16:22.452Z",
+            "id": 10561,
+            "original_currency": "INR",
+            "original_amount": -100,
+            "amount_inr": -100,
+            "occuredAt": "2019-06-03T00:00:00.000Z",
+            "type": "income_expense",
+            "createdBy": "parsed_statement",
+            "third_party": "UPI/915460052360/Payment from Ph/paytmqr28100505/P aytm Payments/",
+            "account": 123,
+            "to_account": null,
+            "transaction_group": 10673
+        },
+        "transaction_group": {
+            "createdAt": "2019-09-16T04:16:21.549Z",
+            "updatedAt": "2019-09-16T04:16:21.549Z",
+            "id": 10673
+        }
+    },
+    ]
 ```
  
-Represents all transactional data.
+Contains data related to snapshots. Snapshot tells the store of value/balance of an account at any given point of time.
 
-### Transactions schema
+### Snapshots schema
 
 Attribute | Type | Description
 --------- | ---- | -----------
 id | string | unique id associated with the object
 createdAt | timestamp | time at which the object was created
 updatedAt | timestamp | time at which the object was updated
-original_currency | string | currency in which transaction is made
-original_amount | number | amount of thetransaction
-amount_inr | number | amount in inr
-occuredAt | ref | defaults to createdAt. Useful when creating manually. 
-type | string | type of transaction 'income_expense' or 'transfer'
-description | string | description of the transaction
-account | account(required) | account from where transaction is made
-to_account | account | only for transfers. The account to which you transferred the money to.
-third_party | string | only for income/expense 
-category | category | to which category the transaction belongs
-tags | tag(collection) | tag used to mark transaction
-transactional_event | transactional_event(required) | what is the transactional event 
-documents | document | documents supporting the transacton
-transaction_group | transaction_group| grouping of transaction
-
+account | account(required) | account to which the snapshot is related
+createdBy | string | user or parsed email or parsed statement
+details | string| details regarding snapshot
+balance | number(required) | the balance in an account
+takenAt | ref | defaults to createdAt. Useful when creating manually.
 
 ### Query Parameters
  
 Parameter | Type | Description
 --------- | ---- | -----------
-id(required) | string | id associated with the transaction to retrieve.
+id(required) | string | id associated with the snapshot to retrieve.
 populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
 select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=third_party 
 omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select. e.g. ?omit=amount_inr
