@@ -228,28 +228,60 @@
                   <li>
                     <a href="#org" class="toc-h2 toc-link" data-title="Org">Org</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#parsed-emails" class="toc-h1 toc-link" data-title="Parsed Emails">Parsed Emails</a>
+              <ul class="toc-list-h2">
                   <li>
-                    <a href="#common-attributes" class="toc-h2 toc-link" data-title="Common Attributes">Common Attributes</a>
+                    <a href="#parsed-emails-schema" class="toc-h2 toc-link" data-title="Parsed emails schema">Parsed emails schema</a>
+                  </li>
+                  <li>
+                    <a href="#query-parameters" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#objects" class="toc-h1 toc-link" data-title="Objects">Objects</a>
+            <a href="#accounts" class="toc-h1 toc-link" data-title="Accounts">Accounts</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#parsed-emails" class="toc-h2 toc-link" data-title="Parsed Emails">Parsed Emails</a>
+                    <a href="#account-schema" class="toc-h2 toc-link" data-title="Account schema">Account schema</a>
                   </li>
                   <li>
-                    <a href="#accounts" class="toc-h2 toc-link" data-title="Accounts">Accounts</a>
+                    <a href="#query-parameters-2" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#transactions-schema" class="toc-h2 toc-link" data-title="Transactions schema">Transactions schema</a>
                   </li>
                   <li>
-                    <a href="#transactions" class="toc-h2 toc-link" data-title="Transactions">Transactions</a>
+                    <a href="#query-parameters-3" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#categories" class="toc-h1 toc-link" data-title="Categories">Categories</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#categories-schema" class="toc-h2 toc-link" data-title="Categories schema">Categories schema</a>
                   </li>
                   <li>
-                    <a href="#categories" class="toc-h2 toc-link" data-title="Categories">Categories</a>
+                    <a href="#query-parameters-4" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#tags" class="toc-h1 toc-link" data-title="Tags">Tags</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#tags-schema" class="toc-h2 toc-link" data-title="Tags schema">Tags schema</a>
                   </li>
                   <li>
-                    <a href="#tags" class="toc-h2 toc-link" data-title="Tags">Tags</a>
+                    <a href="#query-parameters-5" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
                   </li>
               </ul>
           </li>
@@ -323,18 +355,9 @@ curl -X GET <span class="se">\</span>
 Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.</p>
 
 <aside class="notice">
-You must replace <code>cashflowyApiKey'</code> with your personal API key.
+You must replace <code>cashflowyApiKey</code> with your personal API key.
 </aside>
 <h2 id='org'>Org</h2>
-<blockquote>
-<p>ENDPOINTS</p>
-</blockquote>
-<pre class="highlight plaintext"><code>/org/:o_id
-</code></pre>
-<blockquote>
-<p>append this endpoint to the base url for all requests</p>
-</blockquote>
-
 <p>Every user belongs to an organization and all Cashflowy related objects are associated with an org object. </p>
 
 <p>User will have access to the organisation, the user is a part of with a single api key mentioned in the Authorization section above.</p>
@@ -342,42 +365,42 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
 <blockquote>
 <p>The Org object</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'string'</span><span class="p">,</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">description</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">some</span><span class="w"> </span><span class="err">description</span><span class="w"> </span><span class="err">about</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">organization</span><span class="w">
-            </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'string'</span><span class="p">,</span><span class="w">
-            </span><span class="err">allowNull</span><span class="p">:</span><span class="kc">true</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'string'</span><span class="p">,</span><span class="w">
-            </span><span class="err">isIn</span><span class="p">:[</span><span class="err">'personal'</span><span class="p">,</span><span class="err">'business'</span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">email</span><span class="p">:{</span><span class="w">
-            </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'string'</span><span class="p">,</span><span class="w">
-            </span><span class="err">unique</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="err">allowNull</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">is_active</span><span class="p">:{</span><span class="w">
-            </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'boolean'</span><span class="p">,</span><span class="w">
-            </span><span class="err">defaultsTo</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">owner</span><span class="p">:{</span><span class="w"> </span><span class="err">//</span><span class="w"> 
-            </span><span class="err">model</span><span class="p">:</span><span class="err">'user'</span><span class="p">,</span><span class="w">
-            </span><span class="err">required</span><span class="p">:</span><span class="kc">true</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">members</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">//</span><span class="w"> 
-            </span><span class="err">collection</span><span class="p">:</span><span class="w"> </span><span class="err">'member'</span><span class="p">,</span><span class="w">
-            </span><span class="err">via</span><span class="p">:</span><span class="err">'org'</span><span class="p">,</span><span class="w">
-        </span><span class="p">},</span><span class="w">
+<pre class="highlight plaintext"><code>attributes: {
+        name: {
+            type: 'string',
+        },
+        description: { 
+            type: 'string',
+            allowNull:true
+        },
+        type: {
+            type: 'string',
+            isIn:['personal','business']
+        },
+        email:{
+            type: 'string',
+            unique: true,
+            allowNull: true
+        },
+        is_active:{
+            type: 'boolean',
+            defaultsTo: true
+        },
+        owner:{
+            model:'user',
+            required:true
+        },
+        members: {
+            collection: 'member',
+            via:'org',
+        },
 
 
-</span></code></pre>
+</code></pre>
 <blockquote>
 <p>End of object</p>
 </blockquote>
-<h3 id='org-schema'>org schema</h3>
+<h3 id='org-schema'>Org schema</h3>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -423,35 +446,9 @@ You must replace <code>cashflowyApiKey'</code> with your personal API key.
 </tbody></table>
 
 <aside class="notice">
-It is mandatory to have the org endpoint before making an api call for fetching or posting any information.
+It is mandatory to have the org endpoint <code>/org/:o_id</code> added before making an api call for fetching or posting any information.
 </aside>
-<h2 id='common-attributes'>Common Attributes</h2>
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>unique id associated with the object</td>
-</tr>
-<tr>
-<td>createdAt</td>
-<td>timestamp</td>
-<td>time at which the object was created</td>
-</tr>
-<tr>
-<td>updatedAt</td>
-<td>timestamp</td>
-<td>time at which the object was updated</td>
-</tr>
-</tbody></table>
-<h1 id='objects'>Objects</h1>
-<p>Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.</p>
-<h2 id='parsed-emails'>Parsed Emails</h2>
+<h1 id='parsed-emails'>Parsed Emails</h1>
 <blockquote>
 <p>ENDPOINTS</p>
 </blockquote>
@@ -488,7 +485,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
         </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>Parsed Emails contains data successfully parsed and extracted by Cashflowy or the failed ones.</p>
-<h3 id='parsed-emails-schema'>parsed emails schema</h3>
+<h3 id='parsed-emails-schema'>Parsed emails schema</h3>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -496,6 +493,21 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>unique id associated with the object</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
 <tr>
 <td>extracted_data</td>
 <td>json(required)</td>
@@ -556,7 +568,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <td>id associated with the parsed email to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='accounts'>Accounts</h2>
+<h1 id='accounts'>Accounts</h1>
 <blockquote>
 <p>ENDPOINTS</p>
 </blockquote>
@@ -663,7 +675,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
   </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>Account contains financial information and statements.</p>
-<h3 id='account-schema'>account schema</h3>
+<h3 id='account-schema'>Account schema</h3>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -671,6 +683,21 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>unique id associated with the object</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
 <tr>
 <td>org</td>
 <td>org(required)</td>
@@ -751,7 +778,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ?sort=lastName%20ASC</td>
 </tr>
 </tbody></table>
-<h2 id='transactions'>Transactions</h2>
+<h1 id='transactions'>Transactions</h1>
 <blockquote>
 <p>ENDPOINTS</p>
 </blockquote>
@@ -863,7 +890,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
   </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>Represents all transactional data.</p>
-<h3 id='transactions-schema'>transactions schema</h3>
+<h3 id='transactions-schema'>Transactions schema</h3>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -871,6 +898,21 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>unique id associated with the object</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
 <tr>
 <td>original_currency</td>
 <td>string</td>
@@ -991,7 +1033,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 <td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. <code>?sort=createdAt%20ASC</code></td>
 </tr>
 </tbody></table>
-<h2 id='categories'>Categories</h2>
+<h1 id='categories'>Categories</h1>
 <blockquote>
 <p>ENDPOINTS</p>
 </blockquote>
@@ -1108,7 +1150,7 @@ It is mandatory to have the org endpoint before making an api call for fetching 
 </span></code></pre>
 <p>Represents categories under which your budgets- income or expenses are grouped like income, expense, etc.
 Can have sub-categories as a further split up on need basis.</p>
-<h3 id='categories-schema'>categories schema</h3>
+<h3 id='categories-schema'>Categories schema</h3>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -1116,6 +1158,21 @@ Can have sub-categories as a further split up on need basis.</p>
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>unique id associated with the object</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
 <tr>
 <td>org</td>
 <td>org</td>
@@ -1196,7 +1253,7 @@ Can have sub-categories as a further split up on need basis.</p>
 <td>The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. <code>?sort=createdAt%20ASC</code></td>
 </tr>
 </tbody></table>
-<h2 id='tags'>Tags</h2>
+<h1 id='tags'>Tags</h1>
 <blockquote>
 <p>ENDPOINTS</p>
 </blockquote>
@@ -1279,7 +1336,7 @@ Can have sub-categories as a further split up on need basis.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>Represents tags under which transactions are marked by user.</p>
-<h3 id='tags-schema'>tags schema</h3>
+<h3 id='tags-schema'>Tags schema</h3>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -1287,6 +1344,21 @@ Can have sub-categories as a further split up on need basis.</p>
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>unique id associated with the object</td>
+</tr>
+<tr>
+<td>createdAt</td>
+<td>timestamp</td>
+<td>time at which the object was created</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>timestamp</td>
+<td>time at which the object was updated</td>
+</tr>
 <tr>
 <td>org</td>
 <td>org</td>
