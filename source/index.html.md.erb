@@ -75,29 +75,23 @@ Your API keys carry many privileges, so be sure to keep them secure!
 Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.
  
 <aside class="notice">
-You must replace <code>cashflowyApiKey'</code> with your personal API key.
+You must replace <code>cashflowyApiKey</code> with your personal API key.
 </aside>
 
 ## Org
-> ENDPOINTS
-
-```
-/org/:o_id
-```
-> append this endpoint to the base url for all requests
-
 
 Every user belongs to an organization and all Cashflowy related objects are associated with an org object. 
 
 User will have access to the organisation, the user is a part of with a single api key mentioned in the Authorization section above.
+
 > The Org object
 
-```json
+```
 attributes: {
         name: {
             type: 'string',
         },
-        description: { // some description about the organization
+        description: { 
             type: 'string',
             allowNull:true
         },
@@ -114,21 +108,21 @@ attributes: {
             type: 'boolean',
             defaultsTo: true
         },
-        owner:{ // 
+        owner:{
             model:'user',
             required:true
         },
-        members: { // 
+        members: {
             collection: 'member',
             via:'org',
         },
 
 
-```
+ ```
 
 >End of object
 
-### org schema
+### Org schema
 
 Attribute |Type | Description
 --------- |---- |-----------
@@ -141,21 +135,10 @@ owner | user | owner of the organization
 members | member | members of the organization
 
 <aside class="notice">
-It is mandatory to have the org endpoint before making an api call for fetching or posting any information.
+It is mandatory to have the org endpoint <code>/org/:o_id</code> added before making an api call for fetching or posting any information.
 </aside>
 
-## Common Attributes
-
-Attribute | Type | Description
---------- | ---- | -----------
-id | string | unique id associated with the object
-createdAt | timestamp | time at which the object was created
-updatedAt | timestamp | time at which the object was updated
-
-# Objects
-Objects in Cashflowy are the basic terms in your money management and are associated with specific financial data.
- 
-## Parsed Emails
+# Parsed Emails
  
 > ENDPOINTS
 
@@ -187,6 +170,7 @@ request(options, function (error, response, body) {
 });
 
 ```
+
 > Response json
  
 ```json
@@ -199,10 +183,13 @@ request(options, function (error, response, body) {
 
 Parsed Emails contains data successfully parsed and extracted by Cashflowy or the failed ones.
 
-### parsed emails schema
+### Parsed emails schema
 
 Attribute | Type | Description
 --------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
 extracted_data| json(required) | data originally extracted from email
 type | josn(required)| the processed version of extracted data
 emails | string | email id of the user/org
@@ -219,7 +206,7 @@ Parameter |Type | Description
 --------- | ---- | -----------
 id(required)| string | id associated with the parsed email to retrieve
 
-## Accounts
+# Accounts
  
 > ENDPOINTS
 
@@ -334,10 +321,13 @@ request(options, function (error, response, body) {
  
 Account contains financial information and statements.
 
-### account schema
+### Account schema
 
 Attribute | Type | Description
 --------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
 org | org(required) | The name of the organization
 type | string(required)| type of account
 details | string | details of the account
@@ -358,7 +348,7 @@ limit | number? | The maximum number of records to send back (useful for paginat
 skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
 sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ?sort=lastName%20ASC
 
-## Transactions
+# Transactions
 > ENDPOINTS
 
 ```
@@ -477,10 +467,13 @@ request(options, function (error, response, body) {
  
 Represents all transactional data.
 
-### transactions schema
+### Transactions schema
 
 Attribute | Type | Description
 --------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
 original_currency | string | currency in which transaction is made
 original_amount | number | amount of thetransaction
 amount_inr | number | amount in inr
@@ -512,7 +505,7 @@ sort | string? | The sort order. By default, returned records are sorted by prim
 
 
 
-## Categories
+# Categories
 > ENDPOINTS
 
 ```
@@ -636,10 +629,13 @@ request(options, function (error, response, body) {
 Represents categories under which your budgets- income or expenses are grouped like income, expense, etc.
 Can have sub-categories as a further split up on need basis.
 
-### categories schema
+### Categories schema
 
 Attribute | Type | Description
 --------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
 org | org | organisation of the user 
 parent | category | incase of a subcategory entry it has to have a parent category
 name | string(required) | name of the category
@@ -660,7 +656,7 @@ limit | number? | The maximum number of records to send back (useful for paginat
 skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
 sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. `?sort=createdAt%20ASC`
 
-## Tags
+# Tags
 > ENDPOINTS
 
 ```
@@ -750,10 +746,13 @@ request(options, function (error, response, body) {
  
 Represents tags under which transactions are marked by user.
 
-### tags schema
+### Tags schema
 
 Attribute | Type | Description
 --------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
 org | org | some tags can be globally defined;some tags can be specific to a user, while some tags can be global,this field only need when type=user
 name | string(required) | name of the tag
 description | string | description of the tag
