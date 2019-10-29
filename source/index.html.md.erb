@@ -1,0 +1,977 @@
+---
+title: Cashflowy API Reference
+ 
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell
+  - javascript
+ 
+toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+ 
+includes:
+  - errors
+ 
+search: true
+---
+ 
+# Introduction
+> BASE URL
+
+```
+https://app.cashflowy.in/api
+```
+> Use this as a base url before all endpoints
+
+Welcome to the **Cashflowy API**! You can use our API to access Cashflowy API endpoints, which can get information on objects in our database.
+ 
+We have language bindings in Shell,JavaScript!  You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+
+# Authentication
+ 
+> To authorize, use this code:
+ 
+```shell
+# With shell, you can just pass the header with Authorization type as Bearer token in each request
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/accounts
+  -H 'Authorization: Bearer cashflowyApiKey'
+```
+ 
+```javascript
+var request = require("request");
+ 
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/accounts',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey' } };
+ 
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+ 
+  console.log(body);
+});
+ 
+```
+ 
+> Make sure to replace `cashflowyApiKey'` with your API key.
+ 
+ **Getting started**
+
+When you send a request, you often have to include parameters to ensure the request has permission to access and return the data you want.
+ 
+To get started you need to generate an api key.
+<ul>
+<li>Login to your Cashflowy account at <a href="app.cashflowy.in">app.cashflowy.in</a></li>
+<li>Navigate to the right-hand side of the top navigation and click on "User settings"</li>
+<li>You will get the following screen</li>
+<%= image_tag "images/Slate_GenApiKey.png" %>
+<li>Click on "Generate a new API Token" to get your key</li>
+</ul>
+ 
+`Authorization: Bearer cashflowyApiKey'`
+
+Your API keys carry many privileges, so be sure to keep them secure! 
+Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.
+ 
+<aside class="notice">
+You must replace <code>cashflowyApiKey</code> with your personal API key.
+</aside>
+
+## Org
+
+Every user belongs to an organization and all Cashflowy related objects are associated with an org object. 
+
+User will have access to the organisation, the user is a part of with a single api key mentioned in the Authorization section above.
+
+> The Org object
+
+```
+attributes: {
+        name: {
+            type: 'string',
+        },
+        description: { 
+            type: 'string',
+            allowNull:true
+        },
+        type: {
+            type: 'string',
+            isIn:['personal','business']
+        },
+        email:{
+            type: 'string',
+            unique: true,
+            allowNull: true
+        },
+        is_active:{
+            type: 'boolean',
+            defaultsTo: true
+        },
+        owner:{
+            model:'user',
+            required:true
+        },
+        members: {
+            collection: 'member',
+            via:'org',
+        },
+
+
+ ```
+
+>End of object
+
+### Org schema
+
+Attribute |Type | Description
+--------- |---- |-----------
+name |string | The name of the organization
+description | string | some description about the organization
+type | string | type of the organization, either personal or business
+email | string | email assocated with the organization
+is_active | boolean | whether or not is the email
+owner | user | owner of the organization
+members | member | members of the organization
+
+<aside class="notice">
+It is mandatory to have the org endpoint <code>/org/:o_id</code> added before making an api call for fetching or posting any information.
+</aside>
+
+# Transactions
+> ENDPOINTS
+
+```
+/transactions
+/transactions/:id
+```
+
+> GET /transactions
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/transactions
+  -H 'Authorization: Bearer cashflowyApiKey' 
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/transactions',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey'} };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "tags": [
+            {
+                "createdAt": "2019-03-01T10:45:43.000Z",
+                "updatedAt": "2019-03-24T06:02:18.000Z",
+                "id": 17,
+                "name": "predicted_category",
+                "description": "category predicted by aws ml",
+                "type": "global",
+                "color": "grey",
+                "org": null
+            }
+        ],
+        "documents": [],
+        "createdAt": "2019-08-08T01:16:38.220Z",
+        "updatedAt": "2019-09-16T01:17:55.835Z",
+        "id": 10106,
+        "original_currency": "INR",
+        "original_amount": -110,
+        "amount_inr": -110,
+        "occuredAt": "2019-08-07T08:15:00.000Z",
+        "type": "income_expense",
+        "description": "Hakka Noodles and Chilli Chicken",
+        "third_party": "Eat Fit",
+        "account": {
+            "createdAt": "2019-07-29T19:35:28.671Z",
+            "updatedAt": "2019-07-29T19:37:43.845Z",
+            "id": 119,
+            "type": "bank",
+            "details": {
+                "last_snapshot": {
+                    "createdAt": "2019-07-29T19:35:28.685Z",
+                    "updatedAt": "2019-07-29T19:35:28.685Z",
+                    "id": 3859,
+                    "createdBy": "parsed_email",
+                    "details": {},
+                    "balance": 5781.17,
+                    "takenAt": "2019-07-29T19:35:14.000Z",
+                    "account": 119
+                }
+            },
+            "name": "ICICIxxx",
+            "acc_number": "301",
+            "org": 34
+        },
+        "to_account": null,
+        "category": {
+            "createdAt": "2019-07-30T20:19:59.777Z",
+            "updatedAt": "2019-07-30T20:19:59.777Z",
+            "id": 304,
+            "name": "Food",
+            "description": "Amount spend on Food",
+            "type": "expense",
+            "budget": 7500,
+            "org": 34,
+            "parent": null
+        },
+        "transaction_event": {
+            "createdAt": "2019-08-08T01:16:38.215Z",
+            "updatedAt": "2019-09-16T01:17:55.032Z",
+            "id": 10650,
+            "original_currency": "INR",
+            "original_amount": -110,
+            "amount_inr": -110,
+            "occuredAt": "2019-08-07T08:20:00.000Z",
+            "type": "income_expense",
+            "createdBy": "user",
+            "third_party": "Eat Fit",
+            "account": 119,
+            "to_account": null,
+            "transaction_group": 7146
+        },
+        "transaction_group": {
+            "createdAt": "2019-09-16T01:17:54.299Z",
+            "updatedAt": "2019-09-16T01:17:54.299Z",
+            "id": 7146
+        }
+    }
+  ]
+```
+ 
+Represents all transactional data.
+
+### Transactions schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
+original_currency | string | currency in which transaction is made
+original_amount | number | amount of thetransaction
+amount_inr | number | amount in inr
+occuredAt | ref | defaults to createdAt. Useful when creating manually. 
+type | string | type of transaction 'income_expense' or 'transfer'
+description | string | description of the transaction
+account | account(required) | account from where transaction is made
+to_account | account | only for transfers. The account to which you transferred the money to.
+third_party | string | only for income/expense 
+category | category | to which category the transaction belongs
+tags | tag(collection) | tag used to mark transaction
+transactional_event | transactional_event(required) | what is the transactional event 
+documents | document | documents supporting the transacton
+transaction_group | transaction_group| grouping of transaction
+
+
+### Query Parameters
+ 
+Parameter | Type | Description
+--------- | ---- | -----------
+id(required) | string | id associated with the transaction to retrieve.
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=third_party 
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select. e.g. ?omit=amount_inr
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={"name":{"contains":"ICICI"}}
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ``?sort=createdAt%20ASC``
+
+
+# Parsed Emails
+ 
+> ENDPOINTS
+
+```
+/parsed_emails
+/parsed_emails/:id
+```
+
+> GET /parsed_emails
+
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/parsed_emails
+  -H 'Authorization: Bearer cashflowyApiKey'
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/parsed_emails',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+
+> Response json
+ 
+```json
+        [
+            {
+
+            }
+        ]
+ ```
+
+Parsed Emails contains data successfully parsed and extracted by Cashflowy or the failed ones.
+
+### Parsed emails schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
+extracted_data| json(required) | data originally extracted from email
+type | josn(required)| the processed version of extracted data
+emails | string | email id of the user/org
+org | org(required) | org of the user
+type | string(required) | type of email sent for parsing. Can be of types: 'credit_card_alert','credit_card_statement','bank_transaction_alert','bank_statement'
+body_parser_used | string | type of parser used
+message_id | string(required) | unique id associated 
+transaction_event | transaction_event | the accociated transaction(required is true, but when initially created, it is created without a ref to transaction)
+details | json | details regarding the parsed_emails
+
+### Query Parameters
+ 
+Parameter |Type | Description
+--------- | ---- | -----------
+id(required)| string | id associated with the parsed email to retrieve
+
+# Accounts
+ 
+> ENDPOINTS
+
+```
+/accounts
+/accounts/:id
+```
+
+> GET /accounts
+
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/accounts
+  -H 'Authorization: Bearer cashflowyApiKey'
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/accounts',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "statements": [],
+        "createdAt": "2019-07-29T19:35:28.671Z",
+        "updatedAt": "2019-07-29T19:37:43.845Z",
+        "id": 119,
+        "type": "bank",
+        "details": {
+            "last_snapshot": {
+                "createdAt": "2019-07-29T19:35:28.685Z",
+                "updatedAt": "2019-07-29T19:35:28.685Z",
+                "id": 3859,
+                "createdBy": "parsed_email",
+                "details": {},
+                "balance": 5781.17,
+                "takenAt": "2019-07-29T19:35:14.000Z",
+                "account": 119
+            }
+        },
+        "name": "ICICIxxx",
+        "acc_number": "301",
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "User 1",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
+                ]
+            },
+            "owner": 33
+        }
+    },
+    {
+        "statements": [],
+        "createdAt": "2019-07-30T19:49:38.483Z",
+        "updatedAt": "2019-07-30T19:49:38.483Z",
+        "id": 124,
+        "type": "cash",
+        "details": {},
+        "name": "Cash Account",
+        "acc_number": "None",
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "User 1",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
+                ]
+            },
+            "owner": 33
+        }
+    },
+  ]
+```
+ 
+Account contains financial information and statements.
+
+### Account schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
+org | org(required) | The name of the organization
+type | string(required)| type of account
+details | string | details of the account
+name | string | account name
+acc_number | string(required) | number associated with the account
+statements | statement | statements related to account
+
+### Query Parameters
+ 
+Parameter |Type | Description
+--------- | ---- | -----------
+id(required)| string | id associated with the account to retrieve
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=name,org
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={"name":{"contains":"ICICI"}}
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ?sort=lastName%20ASC
+
+# Snapshots
+> ENDPOINTS
+
+```
+/snapshots
+/snapshots/:id
+```
+
+> GET /snapshots
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/snapshots
+  -H 'Authorization: Bearer cashflowyApiKey' 
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/snapshots',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey'} };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "tags": [
+            {
+                "createdAt": "2019-03-01T10:45:43.000Z",
+                "updatedAt": "2019-03-24T06:02:18.000Z",
+                "id": 17,
+                "name": "predicted_category",
+                "description": "category predicted by aws ml",
+                "type": "global",
+                "color": "grey",
+                "org": null
+            }
+        ],
+        "documents": [],
+        "createdAt": "2019-08-08T01:16:38.220Z",
+        "updatedAt": "2019-09-16T01:17:55.835Z",
+        "id": 10106,
+        "original_currency": "INR",
+        "original_amount": -110,
+        "amount_inr": -110,
+        "occuredAt": "2019-08-07T08:15:00.000Z",
+        "type": "income_expense",
+        "description": "Hakka Noodles and Chilli Chicken",
+        "third_party": "Eat Fit",
+        "account": {
+            "createdAt": "2019-07-29T19:35:28.671Z",
+            "updatedAt": "2019-07-29T19:37:43.845Z",
+            "id": 119,
+            "type": "bank",
+            "details": {
+                "last_snapshot": {
+                    "createdAt": "2019-07-29T19:35:28.685Z",
+                    "updatedAt": "2019-07-29T19:35:28.685Z",
+                    "id": 3859,
+                    "createdBy": "parsed_email",
+                    "details": {},
+                    "balance": 5781.17,
+                    "takenAt": "2019-07-29T19:35:14.000Z",
+                    "account": 119
+                }
+            },
+            "name": "ICICI301",
+            "acc_number": "301",
+            "org": 34
+        },
+        "to_account": null,
+        "category": {
+            "createdAt": "2019-07-30T20:19:59.777Z",
+            "updatedAt": "2019-07-30T20:19:59.777Z",
+            "id": 304,
+            "name": "Food",
+            "description": "Amount spend on Food",
+            "type": "expense",
+            "budget": 7500,
+            "org": 34,
+            "parent": null
+        },
+        "transaction_event": {
+            "createdAt": "2019-08-08T01:16:38.215Z",
+            "updatedAt": "2019-09-16T01:17:55.032Z",
+            "id": 10650,
+            "original_currency": "INR",
+            "original_amount": -110,
+            "amount_inr": -110,
+            "occuredAt": "2019-08-07T08:20:00.000Z",
+            "type": "income_expense",
+            "createdBy": "user",
+            "third_party": "Eat Fit",
+            "account": 119,
+            "to_account": null,
+            "transaction_group": 7146
+        },
+        "transaction_group": {
+            "createdAt": "2019-09-16T01:17:54.299Z",
+            "updatedAt": "2019-09-16T01:17:54.299Z",
+            "id": 7146
+        }
+    },
+    {
+        "tags": [],
+        "documents": [],
+        "createdAt": "2019-07-31T12:53:14.160Z",
+        "updatedAt": "2019-09-16T04:16:23.112Z",
+        "id": 10017,
+        "original_currency": "INR",
+        "original_amount": -100,
+        "amount_inr": -100,
+        "occuredAt": "2019-06-03T00:00:00.000Z",
+        "type": "income_expense",
+        "description": null,
+        "third_party": "UPI/915460052360/Payment from Ph/paytmqr28100505/P aytm Payments/",
+        "account": {
+            "createdAt": "2019-07-30T19:38:52.921Z",
+            "updatedAt": "2019-07-30T19:38:53.691Z",
+            "id": 123,
+            "type": "bank",
+            "details": {
+                "last_snapshot": {
+                    "createdAt": "2019-07-30T19:38:53.678Z",
+                    "updatedAt": "2019-07-30T19:38:53.678Z",
+                    "id": 3889,
+                    "createdBy": "parsed_document",
+                    "details": {},
+                    "balance": 41971.1,
+                    "takenAt": "2019-06-29T18:29:59.999Z",
+                    "account": 123
+                }
+            },
+            "name": "Auto Generated: 5301",
+            "acc_number": "5301",
+            "org": 34
+        },
+        "to_account": null,
+        "category": null,
+        "transaction_event": {
+            "createdAt": "2019-07-31T12:53:14.140Z",
+            "updatedAt": "2019-09-16T04:16:22.452Z",
+            "id": 10561,
+            "original_currency": "INR",
+            "original_amount": -100,
+            "amount_inr": -100,
+            "occuredAt": "2019-06-03T00:00:00.000Z",
+            "type": "income_expense",
+            "createdBy": "parsed_statement",
+            "third_party": "UPI/915460052360/Payment from Ph/paytmqr28100505/P aytm Payments/",
+            "account": 123,
+            "to_account": null,
+            "transaction_group": 10673
+        },
+        "transaction_group": {
+            "createdAt": "2019-09-16T04:16:21.549Z",
+            "updatedAt": "2019-09-16T04:16:21.549Z",
+            "id": 10673
+        }
+    },
+    ]
+```
+ 
+Contains data related to snapshots. Snapshot tells the store of value/balance of an account at any given point of time.
+
+### Snapshots schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
+account | account(required) | account to which the snapshot is related
+createdBy | string | user or parsed email or parsed statement
+details | string| details regarding snapshot
+balance | number(required) | the balance in an account
+takenAt | ref | defaults to createdAt. Useful when creating manually.
+
+### Query Parameters
+ 
+Parameter | Type | Description
+--------- | ---- | -----------
+id(required) | string | id associated with the snapshot to retrieve.
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. ?select=third_party 
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select. e.g. ?omit=amount_inr
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.e.g. ?where={"name":{"contains":"ICICI"}}
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. ``?sort=createdAt%20ASC``
+
+
+
+# Categories
+> ENDPOINTS
+
+```
+/categories
+/categories/:id
+```
+
+> GET /categories
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/categories
+  -H 'Authorization: Bearer cashflowyApiKey' 
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/categories',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey'} };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "createdAt": "2019-07-30T20:22:59.349Z",
+        "updatedAt": "2019-07-30T20:22:59.349Z",
+        "id": 307,
+        "name": "Electricity",
+        "description": "Amount on Electricity Bill",
+        "type": "expense",
+        "budget": 400,
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "User 1",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
+                ]
+            },
+            "owner": 33
+        },
+        "parent": {
+            "createdAt": "2019-07-30T20:21:10.270Z",
+            "updatedAt": "2019-07-30T20:21:10.270Z",
+            "id": 305,
+            "name": "Ammenities",
+            "description": "Amount spent on basic and necessary amenities",
+            "type": "expense",
+            "budget": 2000,
+            "org": 34,
+            "parent": null
+        }
+    },
+    {
+        "createdAt": "2019-07-31T13:53:16.354Z",
+        "updatedAt": "2019-07-31T13:53:16.354Z",
+        "id": 313,
+        "name": "Internet",
+        "description": "Amount on Internet Bill",
+        "type": "expense",
+        "budget": 300,
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "User 1",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
+                ]
+            },
+            "owner": 33
+        },
+        "parent": {
+            "createdAt": "2019-07-30T20:21:10.270Z",
+            "updatedAt": "2019-07-30T20:21:10.270Z",
+            "id": 305,
+            "name": "Ammenities",
+            "description": "Amount spent on basic and necessary amenities",
+            "type": "expense",
+            "budget": 2000,
+            "org": 34,
+            "parent": null
+        }
+    }
+]
+```
+ 
+Represents categories under which your budgets- income or expenses are grouped like income, expense, etc.
+Can have sub-categories as a further split up on need basis.
+
+### Categories schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
+org | org | organisation of the user 
+parent | category | incase of a subcategory entry it has to have a parent category
+name | string(required) | name of the category
+description | string | description of the category
+type | string | type of category (income or expense)
+budget | number | amount allocated for the category
+
+### Query Parameters
+ 
+Parameter | Type | Description
+--------- | ---- | -----------
+id(required) | string | id associated with the category to retrieve.
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. `?select=type`
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.  e.g. `?omit=budget`
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.   e.g. `?where={"description":{"contains":"Electricity"}}`
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. `?sort=createdAt%20ASC`
+
+# Tags
+> ENDPOINTS
+
+```
+/tags
+/tags/:id
+```
+
+> GET /tags
+ 
+```shell
+curl -X GET \
+  https://app.cashflowy.in/api/org/:o_id/tags
+  -H 'Authorization: Bearer cashflowyApiKey' 
+```
+ 
+```javascript
+var request = require("request");
+
+var options = { method: 'GET',
+  url: 'https://app.cashflowy.in/api/org/:o_id/tags',
+  headers: 
+   { Authorization: 'Bearer cashflowyApiKey'} };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+
+```
+ 
+> Response json
+ 
+```json
+[
+    {
+        "transactions": [
+            {
+                "createdAt": "2019-07-29T19:48:31.107Z",
+                "updatedAt": "2019-09-16T04:14:27.608Z",
+                "id": 9978,
+                "original_currency": "INR",
+                "original_amount": 12776,
+                "amount_inr": 12776,
+                "occuredAt": "2019-06-28T00:00:00.000Z",
+                "type": "income_expense",
+                "description": "Repaid Credit card bill",
+                "third_party": "IMPS PMT 917911409628 9229 (Ref# 00000000000628011823513)",
+                "account": 120,
+                "to_account": null,
+                "category": null,
+                "transaction_event": 10522,
+                "transaction_group": 10639
+            }
+        ],
+        "createdAt": "2019-07-29T20:10:36.702Z",
+        "updatedAt": "2019-07-29T20:10:36.702Z",
+        "id": 40,
+        "name": "Repay_Hdfc",
+        "description": "Repayment of credit card",
+        "type": "user",
+        "color": "teal",
+        "org": {
+            "createdAt": "2019-06-25T09:30:53.169Z",
+            "updatedAt": "2019-09-16T21:56:04.366+00:00",
+            "id": 34,
+            "name": "User 1",
+            "description": null,
+            "type": "personal",
+            "email": null,
+            "is_active": true,
+            "details": {
+                "default_account": 33,
+                "timezone_offset": -330,
+                "default_currency": "INR",
+                "statement_passwords": [
+                    "XXXXXXXX",
+                    "05XXXXXXXXX",
+                    "XXXXXXXX"
+                ]
+            },
+            "owner": 33
+        }
+    }
+]
+```
+ 
+Represents tags under which transactions are marked by user.
+
+### Tags schema
+
+Attribute | Type | Description
+--------- | ---- | -----------
+id | string | unique id associated with the object
+createdAt | timestamp | time at which the object was created
+updatedAt | timestamp | time at which the object was updated
+org | org | some tags can be globally defined;some tags can be specific to a user, while some tags can be global,this field only need when type=user
+name | string(required) | name of the tag
+description | string | description of the tag
+type | string | user or global
+color  | string | color of the tag; defaults to "teal"
+transactions | transaction | transaction which is tagged
+
+### Query Parameters
+ 
+Parameter | Type | Description
+--------- | ---- | -----------
+id(required) | string | id associated with the tag to retrieve.
+populate | string | If specified, overide the default automatic population process. Accepts a comma-separated list of attribute names for which to populate record values, or specify false to have no attributes populated. 
+select | string? | 	The attributes to include in the result, specified as a comma-delimited list. By default, all attributes are selected. Not valid for plural (“collection”) association attributes. e.g. `?select=type`
+omit | string? | The attributes to exclude from the result, specified as a comma-delimited list. Cannot be used in conjuction with select.  e.g. `?omit=budget`
+where | string? | Instead of filtering based on a specific attribute, you may instead choose to provide a where parameter with the WHERE piece of a Waterline criteria, encoded as a JSON string. This allows you to take advantage of contains, startsWith, and other sub-attribute criteria modifiers for more powerful find() queries.   e.g. `?where={"description":{"contains":"Repayment"}}`
+limit | number? | The maximum number of records to send back (useful for pagination). Defaults to 30. e.g. `?limit=100`
+skip | number? | 	The number of records to skip (useful for pagination). e.g. `?skip=30`
+sort | string? | The sort order. By default, returned records are sorted by primary key value in ascending order. e.g. `?sort=createdAt%20ASC`
